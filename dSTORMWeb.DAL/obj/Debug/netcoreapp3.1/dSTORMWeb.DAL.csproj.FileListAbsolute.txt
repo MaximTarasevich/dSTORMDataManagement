@@ -1,0 +1,16 @@
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.csprojAssemblyReference.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.AssemblyInfoInputs.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.AssemblyInfo.cs
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.csproj.CoreCompileInputs.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/bin/Debug/netcoreapp3.1/dSTORMWeb.DAL.deps.json
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/bin/Debug/netcoreapp3.1/dSTORMWeb.DAL.dll
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/bin/Debug/netcoreapp3.1/dSTORMWeb.DAL.pdb
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/bin/Debug/netcoreapp3.1/dSTORMWeb.Shared.dll
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/bin/Debug/netcoreapp3.1/dSTORMWeb.Shared.pdb
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/staticwebassets/dSTORMWeb.DAL.StaticWebAssets.Manifest.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/staticwebassets/dSTORMWeb.DAL.StaticWebAssets.xml
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/scopedcss/bundle/dSTORMWeb.DAL.styles.css
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.RazorTargetAssemblyInfo.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.csproj.CopyComplete
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.dll
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.DAL/obj/Debug/netcoreapp3.1/dSTORMWeb.DAL.pdb

@@ -1,0 +1,136 @@
+﻿@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+
+@typeparam T
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <SfGrid @ref="Grid"
+                    Query=@GridQuery
+                    TValue="T"
+                    AllowPaging="@AllowPaging"
+                    Height="@Height" Width="@Width"
+                    AllowSorting="@AllowSorting"
+                    AllowFiltering="@AllowFiltering"
+                    AllowResizing="@AllowResizing"
+                    EnableVirtualization="@EnableVirtualization"
+                    Toolbar="@ToolbarItems">
+                <SfDataManager Headers=@HeaderData Url="@URL" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
+                <GridPageSettings Context="item" PageSizes="true" PageCount="5"></GridPageSettings>
+                <GridEvents OnActionBegin="ActionBeginHandler" OnToolbarClick="ToolbarClickHandler" OnRecordDoubleClick="doubleClick" TValue="T"></GridEvents>
+                <GridFilterSettings Mode="FilterBarMode.Immediate"></GridFilterSettings>
+                @Columns
+            </SfGrid>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public Query GridQuery { get; set; }
+    [Parameter]
+    public RenderFragment Columns { get; set; }
+    [Parameter]
+    public List<object> ToolbarItems { get; set; }
+    [Parameter]
+    public string URL { get; set; }
+    [Parameter]
+    public string Width { get; set; } = "100%";
+    [Parameter]
+    public int PageSize { get; set; }
+    [Parameter]
+    public string Height { get; set; } = "calc(100vh - 200px)";
+    [Parameter]
+    public bool AllowPaging { get; set; } = true;
+    [Parameter]
+    public bool AllowSorting { get; set; } = true;
+    [Parameter]
+    public bool AllowFiltering { get; set; } = true;
+    [Parameter]
+    public bool AllowResizing { get; set; } = true;
+    [Parameter]
+    public List<GridColumn> GridColumns { get; set; } = new List<GridColumn>();
+    [Parameter]
+    public bool EnableVirtualization { get; set; } = false;
+    [Parameter]
+    public EventCallback<RecordDoubleClickEventArgs<T>> doubleClick { get; set; }
+    [Parameter]
+    public EventCallback<ClickEventArgs> ToolbarClickHandler { get; set; }
+    SfGrid<T> Grid;
+    private IDictionary<string, string> HeaderData = new Dictionary<string, string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+    public void BtnEnable(List<string> toolbarItems, bool IsEnable)
+    {
+        this.Grid.EnableToolbarItems(toolbarItems, IsEnable);
+    }
+    public void Refresh()
+    {
+        this.Grid.Refresh();
+    }
+
+    public void UpdateGridQuery(Query q)
+    {
+        this.GridQuery = q;
+        this.StateHasChanged();
+    }
+    public void ActionBeginHandler(ActionEventArgs<T> args)
+    {
+        if (args.CurrentFilterObject != null)
+        {
+            var columnName = args.CurrentFilteringColumn;
+            var columnValue = args.CurrentFilterObject?.Value;
+
+            if (!string.IsNullOrWhiteSpace(columnName))
+            {
+                if (this.GridQuery == null)
+                {
+                    this.GridQuery = new Query().AddParams(columnName.ToLower(), columnValue);
+                }
+                else
+                {
+                    this.GridQuery.AddParams(columnName.ToLower(), columnValue);
+                }
+            }
+            else
+            {
+                this.GridQuery.Queries.Params.Remove(args.CurrentFilterObject.Field.ToLower());
+            }
+
+            if (columnValue is string)
+            {
+                if ((string)columnValue == "All")
+                    this.GridQuery.Queries.Params.Remove(args.CurrentFilterObject.Field.ToLower());
+            }
+
+
+        }
+        this.StateHasChanged();
+    }
+    public void FilterByColumn(string field, string oper, object val)
+    {
+        this.Grid.FilterByColumn(field, oper, val);
+        this.StateHasChanged();
+    }
+}
+
+<style>
+
+
+
+
+
+    .e-refresh:before {
+        content: "\e710";
+    }
+
+    .e-toolbar-items {
+        float: right;
+    }
+</style>

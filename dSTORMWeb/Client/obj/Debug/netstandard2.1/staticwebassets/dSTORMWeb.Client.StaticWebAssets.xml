@@ -1,0 +1,4 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb/Client/bin/Debug/netstandard2.1/wwwroot/" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor" Path="/Users/maxim/.nuget/packages/syncfusion.blazor/18.1.0.56/build/../staticwebassets/" />
+</StaticWebAssets>

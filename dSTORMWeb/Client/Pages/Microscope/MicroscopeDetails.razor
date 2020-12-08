@@ -1,0 +1,57 @@
+﻿@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.RichTextEditor
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.DropDowns
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Microscope</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Producer</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Producer" placeholder="Producer" />
+                                <ValidationMessage For="@(() => model.Producer)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Model</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Model" placeholder="Model" />
+                                <ValidationMessage For="@(() => model.Model)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Type</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Type" placeholder="Type" />
+                                <ValidationMessage For="@(() => model.Type)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public MicroscopeViewModel model { get; set; } = new MicroscopeViewModel();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message{
+        color:red;
+        font-size:12px;
+    }
+</style>

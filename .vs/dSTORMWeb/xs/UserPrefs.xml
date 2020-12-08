@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{E8B5126B-F320-4A20-BB6A-9ABE015302C7}|Default">
+  <MonoDevelop.Ide.ItemProperties.dSTORMWeb.Server PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="dSTORMWeb" expanded="True">
+            <Node name="dSTORMWeb.DAL" expanded="True">
+              <Node name="Converters" expanded="True" />
+            </Node>
+            <Node name="dSTORMWeb.Shared" expanded="True">
+              <Node name="FilterNames.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>dSTORM.Shared/dSTORM.Shared.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

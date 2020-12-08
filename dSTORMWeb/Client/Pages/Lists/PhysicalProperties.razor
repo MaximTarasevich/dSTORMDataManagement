@@ -1,0 +1,57 @@
+﻿@page "/physicalproperties"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/physicalproperty/GetPhysicalProperties"
+          doubleClick="@((RecordDoubleClickEventArgs<PhysicalPropertyViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(PhysicalPropertyViewModel.Humidity)" HeaderText="Humidity" TextAlign="TextAlign.Center" Width="500"></GridColumn>
+            <GridColumn Field="@nameof(PhysicalPropertyViewModel.Temperature)" HeaderText="Temperature" TextAlign="TextAlign.Center" Width="400"></GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<PhysicalPropertyViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<PhysicalPropertyViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("physicalproperty/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/physicalproperty");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

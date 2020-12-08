@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+@using dSTORMWeb.Client.Shared.Components
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="content">
+        <CascadingValue Value="this" Name="MainLayout">
+            @Body
+        </CascadingValue>
+    </div>
+    <Loader @ref="Loader" IsLoaderVisible="false"></Loader>
+
+</div>
+
+@code{
+    private Loader Loader;
+    public async Task ShowLoader()
+    {
+        await this.Loader.Show();
+        this.StateHasChanged();
+    }
+    public void HideLoader()
+    {
+        this.Loader.Hide();
+        this.StateHasChanged();
+    }
+}

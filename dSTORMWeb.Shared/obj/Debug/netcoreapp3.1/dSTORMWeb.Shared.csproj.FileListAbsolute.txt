@@ -1,0 +1,13 @@
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.csprojAssemblyReference.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.AssemblyInfoInputs.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.AssemblyInfo.cs
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.csproj.CoreCompileInputs.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/bin/Debug/netcoreapp3.1/dSTORMWeb.Shared.deps.json
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/bin/Debug/netcoreapp3.1/dSTORMWeb.Shared.dll
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/bin/Debug/netcoreapp3.1/dSTORMWeb.Shared.pdb
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/staticwebassets/dSTORMWeb.Shared.StaticWebAssets.Manifest.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/staticwebassets/dSTORMWeb.Shared.StaticWebAssets.xml
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/scopedcss/bundle/dSTORMWeb.Shared.styles.css
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.RazorTargetAssemblyInfo.cache
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.dll
+/Users/maxim/Documents/dSTORMWeb/dSTORMWeb/dSTORMWeb.Shared/obj/Debug/netcoreapp3.1/dSTORMWeb.Shared.pdb

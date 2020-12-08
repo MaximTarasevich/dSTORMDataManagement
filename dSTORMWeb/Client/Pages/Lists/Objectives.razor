@@ -1,0 +1,61 @@
+﻿@page "/objectives"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/objective/GetObjectives"
+          doubleClick="@((RecordDoubleClickEventArgs<ObjectiveViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(ObjectiveViewModel.Name)" HeaderText="Name" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(ObjectiveViewModel.Resolution)" HeaderText="Resolution" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(ObjectiveViewModel.Magnification)" HeaderText="Magnification" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(ObjectiveViewModel.EyePiece)" HeaderText="EyePiece" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(ObjectiveViewModel.ObjectiveLens)" HeaderText="ObjectiveLens" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(ObjectiveViewModel.Description)" HeaderText="Description" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<ObjectiveViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<ObjectiveViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("objective/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/objective");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}
