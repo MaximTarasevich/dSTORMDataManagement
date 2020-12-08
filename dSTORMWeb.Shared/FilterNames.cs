@@ -14,6 +14,13 @@ namespace dSTORMWeb.Shared
         public const string DESCRIPTION = "description";
         public const string TEMPERATURE = "temperature";
         public const string HUMIDITY = "humidite";
+        public const string WAVELENGTH = "wavelength";
+        public const string MAXPOWER = "maxpower";
+        public const string OUTPUTPOWER = "outputpower";
+        public const string OBJECRTIVE = "objective";
+        public const string MATRIXTYPE = "matrixtype";
+        public const string FOCALLENGTH = "focallength";
+        public const string INTENSITYVALUE = "intensityvalue";
 
 
     }

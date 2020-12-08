@@ -1,0 +1,57 @@
+﻿@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.RichTextEditor
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.DropDowns
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Microscope</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Name</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Name" placeholder="Name" />
+                                <ValidationMessage For="@(() => model.Name)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Intensity Value</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.IntensityValue" placeholder="Intensity Value" />
+                                <ValidationMessage For="@(() => model.IntensityValue)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Description</label>
+                                <InputTextArea Class="form-control inputTextClass" @bind-Value="@model.DescriptionFORM" placeholder="Description" />
+                                <ValidationMessage For="@(() => model.DescriptionFORM)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public AOTFilterViewModel model { get; set; } = new AOTFilterViewModel();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>

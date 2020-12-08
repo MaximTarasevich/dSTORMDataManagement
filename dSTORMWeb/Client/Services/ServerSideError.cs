@@ -70,7 +70,51 @@ namespace dSTORMWeb.Client.Services
                         break;
                 }
             }
-
+            else if (Type == typeof(LaserViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Laser with such Producer/Model/Type  already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(CameraViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Camera with such Producer/Model  already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(AOTFilterViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Filter with such Name  already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
             CurrentEditContext.NotifyValidationStateChanged();
 
         }

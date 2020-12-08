@@ -15,6 +15,6 @@ namespace dSTORMWeb.Server.Models
 
         public string ObjectiveLens { get; set; }
 
-        public string Description { get; set; }
+        public string DescriptionFORM { get; set; }
     }
 }

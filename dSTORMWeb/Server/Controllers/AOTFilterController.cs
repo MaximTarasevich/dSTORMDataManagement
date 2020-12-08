@@ -12,31 +12,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dSTORMWeb.Server.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
-    public class ObjectiveController : Controller
+    public class AOTFilterController : Controller
     {
         private readonly DataManager _dm;
 
-        public ObjectiveController(DataManager dm)
+        public AOTFilterController(DataManager dm)
         {
             _dm = dm;
         }
 
         [HttpGet]
-        [Route("GetObjective/{id}")]
-        public async Task<IActionResult> GetObjective([FromRoute] int id)
+        [Route("GetFilter/{id}")]
+        public async Task<IActionResult> GetFilter([FromRoute] int id)
         {
             try
             {
-                var item = await _dm.ObjectiveAccessor.GetObjective(id);
+                var item = await _dm.AOTFilterAccessor.GetAOTFilter(id);
 
                 if (item == null)
                     return Ok(new ResponseModel() { Result = ResultCode.NotFound });
 
 
-                ObjectiveViewModel model = item.ToObjectiveViewModel();
+                AOTFilterViewModel model = item.ToAOTFilterViewModel();
 
                 return Ok(model);
 
@@ -46,13 +45,13 @@ namespace dSTORMWeb.Server.Controllers
                 return Ok(new ResponseModel() { Result = ResultCode.ServerError, Description = ex.Message });
             }
         }
-        [Route("GetObjectives")]
-        public async Task<JsonResult> GetObjectives([FromQuery(Name = "$skip")] int skip = 0, [FromQuery(Name = "$top")] int top = 20,
+        [Route("GetFilters")]
+        public async Task<JsonResult> GetFilters([FromQuery(Name = "$skip")] int skip = 0, [FromQuery(Name = "$top")] int top = 20,
                     [FromQuery(Name = "$orderby")] string sortfield = "name")
         {
-            var filters = FilterHelper.BuildObjectiveFilters(this.HttpContext);
-            var count = await _dm.ObjectiveAccessor.GetObjectivesCount();
-            var list = await _dm.ObjectiveAccessor.GetObjectives(filters, skip, top, sortfield);
+            var filters = FilterHelper.BuildAOTFilterFilters(this.HttpContext);
+            var count = await _dm.AOTFilterAccessor.GetAOTFiltersCount();
+            var list = await _dm.AOTFilterAccessor.GetAOTFilters(filters, skip, top, sortfield);
 
 
 
@@ -62,11 +61,8 @@ namespace dSTORMWeb.Server.Controllers
                 {
                     id = e.Id,
                     name = e.Name,
-                    magnification = e.Magnification,
-                    resolution = e.Resolution,
-                    eyepiece = e.EyePiece,
-                    objectivelens = e.ObjectiveLens,
-                    descriptionform = e.Description
+                    intensityvalue = e.IntensityValue,
+                    descriptionFORM = e.Description,
                 }).ToList();
 
                 var result = new
@@ -81,35 +77,38 @@ namespace dSTORMWeb.Server.Controllers
                 var result = new
                 {
                     Count = 0,
-                    Items = new List<ObjectiveEntity>()
+                    Items = new List<AOTFilterEntity>()
                 };
                 return Json(result);
             }
         }
         [HttpPost]
         [Route("Save")]
-        public async Task<IActionResult> Save([FromBody] ObjectiveViewModel model)
+        public async Task<IActionResult> Save([FromBody] AOTFilterViewModel model)
         {
             try
             {
-                ObjectiveEntity entity = null;
+                AOTFilterEntity entity = null;
                 if (!ModelState.IsValid)
                     return Ok(new ResponseModel() { Result = ResultCode.NotValidData });
+                var item = await _dm.AOTFilterAccessor.GetAOTFilter(model.Name);
+                if (item != null && item.Id != model.Id)
+                    return Ok(new ResponseModel() { Result = ResultCode.AlreadyExists });
                 if (model.Id <= 0)
                 {
-                    entity = new ObjectiveEntity();
+                    entity = new AOTFilterEntity();
                 }
                 else
                 {
-                    entity = await _dm.ObjectiveAccessor.GetObjective(model.Id);
+                    entity = await _dm.AOTFilterAccessor.GetAOTFilter(model.Id);
                     if (entity == null)
                         return Ok(new ResponseModel()
                         { Result = ResultCode.AlreadyExists });
 
                 }
-                var entityToSave = model.ToObjectiveEntity();
+                var entityToSave = model.ToAOTFilterEntity();
 
-                await _dm.ObjectiveAccessor.SaveObjective(entityToSave);
+                await _dm.AOTFilterAccessor.SaveAOTFilter(entityToSave);
 
                 return Ok(new ResponseModel() { Result = ResultCode.Success });
             }
@@ -121,15 +120,15 @@ namespace dSTORMWeb.Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-        public async Task<IActionResult> Delete([FromBody] ObjectiveViewModel model)
+        public async Task<IActionResult> Delete([FromBody] AOTFilterViewModel model)
         {
             try
             {
-                var item = await _dm.ObjectiveAccessor.GetObjective(model.Id);
+                var item = await _dm.AOTFilterAccessor.GetAOTFilter(model.Id);
                 if (item == null)
                     return Ok(new ResponseModel() { Result = ResultCode.NotFound });
 
-                await _dm.ObjectiveAccessor.DeleteItem(item.Id);
+                await _dm.AOTFilterAccessor.DeletFilter(item.Id);
                 return Ok(new ResponseModel() { Result = ResultCode.Success });
             }
             catch (Exception ex)

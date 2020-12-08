@@ -1,0 +1,63 @@
+﻿@page "/lasers"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/laser/GetLasers"
+          doubleClick="@((RecordDoubleClickEventArgs<LaserViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(LaserViewModel.Producer)" HeaderText="Producer" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(LaserViewModel.Model)" HeaderText="Model" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(LaserViewModel.Type)" HeaderText="Type" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(LaserViewModel.MaxPower)" HeaderText="Max Power" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(LaserViewModel.OutputPower)" HeaderText="Output Power" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(LaserViewModel.WaveLength)" HeaderText="Wave Length" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(LaserViewModel.DescriptionFORM)" HeaderText="Description" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<LaserViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<LaserViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("laser/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/laser");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

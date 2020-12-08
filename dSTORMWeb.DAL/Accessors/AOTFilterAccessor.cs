@@ -20,7 +20,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToAOTFilterEntity();
         }
+        public async Task<AOTFilterEntity> GetAOTFilter(string name)
+        {
 
+            return (await Query.Where(e => e.Name == name).FirstOrDefaultAsync()).ToAOTFilterEntity();
+        }
         public async Task<AOTFilterEntity> SaveAOTFilter(AOTFilterEntity entity)
         {
 
@@ -48,6 +52,10 @@ namespace dSTORMWeb.DAL.Accessors
             return await Query.CountAsync();
         }
 
-
+        public async Task<int> DeletFilter(int id)
+        {
+            var res = await Context.Database.ExecuteSqlCommandAsync("delete from aotfilters where Id = " + id + "");
+            return await Context.SaveChangesAsync();
+        }
     }
 }

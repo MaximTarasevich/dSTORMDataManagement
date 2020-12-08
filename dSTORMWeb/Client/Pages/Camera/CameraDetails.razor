@@ -12,37 +12,38 @@
                     <div class="col-sm-9" style="max-width:100%">
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Name</label>
-                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Name" placeholder="Name" />
-                                <ValidationMessage For="@(() => model.Name)" />
+                                <label class="col-form-label labelFont">Producer</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Producer" placeholder="Producer" />
+                                <ValidationMessage For="@(() => model.Producer)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Eye piece</label>
-                                <InputText Class="form-control inputTextClass" @bind-Value="@model.EyePiece" placeholder="Eye piece" />
-                                <ValidationMessage For="@(() => model.EyePiece)" />
+                                <label class="col-form-label labelFont">Model</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Model" placeholder="Model" />
+                                <ValidationMessage For="@(() => model.Model)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Objective lens</label>
-                                <InputText Class="form-control inputTextClass" @bind-Value="@model.ObjectiveLens" placeholder="Objective lens" />
-                                <ValidationMessage For="@(() => model.ObjectiveLens)" />
+                                <label class="col-form-label labelFont">Objcetive</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Objective" placeholder="Objcetive" />
+                                <ValidationMessage For="@(() => model.Objective)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Magnification</label>
-                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.Magnification" placeholder="Magnification" />
-                                <ValidationMessage For="@(() => model.Magnification)" />
+                                <label class="col-form-label labelFont">Focal Length</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.FocalLength" placeholder="Focal Length" />
+                                <ValidationMessage For="@(() => model.FocalLength)" />
                             </div>
                         </div>
+
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Resolution</label>
-                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.Resolution" placeholder="Resolution" />
-                                <ValidationMessage For="@(() => model.Resolution)" />
+                                <label class="col-form-label labelFont">Matrix Type</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.MatrixType" placeholder="Matrix Type" />
+                                <ValidationMessage For="@(() => model.MatrixType)" />
                             </div>
                         </div>
                         <div class="form-label-group">
@@ -62,7 +63,7 @@
 
 @code {
     [Parameter]
-    public ObjectiveViewModel model { get; set; } = new ObjectiveViewModel();
+    public CameraViewModel model { get; set; } = new CameraViewModel();
 
     protected override void OnInitialized()
     {

@@ -28,6 +28,6 @@ namespace dSTORMWeb.Client.Models
         public string ObjectiveLens { get; set; }
 
         [StringLength(255, ErrorMessage = "Description field is to long.")]
-        public string Description { get; set; }
+        public string DescriptionFORM { get; set; }
     }
 }

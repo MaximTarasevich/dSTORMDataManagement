@@ -18,7 +18,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToLaserEntity();
         }
+        public async Task<LaserEntity> GetLaser(string producer, string model, string type)
+        {
 
+            return (await Query.Where(e => e.Producer == producer && e.Model == model && e.Type == type).FirstOrDefaultAsync()).ToLaserEntity();
+        }
         public async Task<LaserEntity> SaveLaser(LaserEntity entity)
         {
 
@@ -44,6 +48,11 @@ namespace dSTORMWeb.DAL.Accessors
         public async Task<int> GetLaserCount()
         {
             return await Query.CountAsync();
+        }
+        public async Task<int> DeleteLaser(int id)
+        {
+            var res = await Context.Database.ExecuteSqlCommandAsync("delete from lasers where Id = " + id + "");
+            return await Context.SaveChangesAsync();
         }
     }
 }

@@ -19,7 +19,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToCameraEntity();
         }
+        public async Task<CameraEntity> GetCamera(string prod, string mod)
+        {
 
+            return (await Query.Where(e => e.Producer == prod && e.Model == mod).FirstOrDefaultAsync()).ToCameraEntity();
+        }
         public async Task<CameraEntity> SaveCamera(CameraEntity entity)
         {
 
@@ -45,6 +49,12 @@ namespace dSTORMWeb.DAL.Accessors
         public async Task<int> GetCamerasCount()
         {
             return await Query.CountAsync();
+        }
+
+        public async Task<int> DeleteCamera(int id)
+        {
+            var res = await Context.Database.ExecuteSqlCommandAsync("delete from cameras where Id = " + id + "");
+            return await Context.SaveChangesAsync();
         }
     }
 }

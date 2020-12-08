@@ -15,8 +15,9 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new AOTFilter();
 
             }
-
-       
+            entity.Name = newEntity.Name;
+            entity.Description = newEntity.Description;
+            entity.IntensityValue = newEntity.IntensityValue;
             return entity;
         }
 
@@ -27,7 +28,10 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             AOTFilterEntity entity = new AOTFilterEntity();
-
+            entity.Id = model.Id;
+            entity.Name = model.Name;
+            entity.Description = model.Description;
+            entity.IntensityValue = model.IntensityValue;
             return entity;
         }
 

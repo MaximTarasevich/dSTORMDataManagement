@@ -35,13 +35,29 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.NAME:
+                        q = q.Where(e => e.Name.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.INTENSITYVALUE:
+                        q = q.Where(e => e.IntensityValue.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.DESCRIPTION:
+                        q = q.Where(e => e.Description.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.NAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Name) : q.OrderByDescending(e => e.Name);
+                    break;
+                case FilterNames.INTENSITYVALUE:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.IntensityValue) : q.OrderByDescending(e => e.IntensityValue);
+                    break;
+                case FilterNames.DESCRIPTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Description) : q.OrderByDescending(e => e.Description);
+                    break;
             }
             return q;
         }
@@ -53,13 +69,47 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.PRODUCER:
+                        q = q.Where(e => e.Producer.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.MODEL:
+                        q = q.Where(e => e.Model.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.OBJECRTIVE:
+                        q = q.Where(e => e.Objective.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.FOCALLENGTH:
+                        q = q.Where(e => e.FocalLength.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.MATRIXTYPE:
+                        q = q.Where(e => e.MatrixType.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.DESCRIPTION:
+                        q = q.Where(e => e.Description.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.PRODUCER:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Producer) : q.OrderByDescending(e => e.Producer);
+                    break;
+                case FilterNames.MODEL:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Model) : q.OrderByDescending(e => e.Model);
+                    break;
+                case FilterNames.OBJECRTIVE:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Objective) : q.OrderByDescending(e => e.Objective);
+                    break;
+                case FilterNames.FOCALLENGTH:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.FocalLength) : q.OrderByDescending(e => e.FocalLength);
+                    break;
+                case FilterNames.MATRIXTYPE:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.MatrixType) : q.OrderByDescending(e => e.MatrixType);
+                    break;
+                case FilterNames.DESCRIPTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Description) : q.OrderByDescending(e => e.Description);
+                    break;
             }
             return q;
         }
@@ -197,13 +247,53 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.PRODUCER:
+                        q = q.Where(e => e.Producer.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.MODEL:
+                        q = q.Where(e => e.Model.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.TYPE:
+                        q = q.Where(e => e.Type.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.WAVELENGTH:
+                        q = q.Where(e => e.WaveLength.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.MAXPOWER:
+                        q = q.Where(e => e.MaxPower.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.OUTPUTPOWER:
+                        q = q.Where(e => e.OutputPower.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.DESCRIPTION:
+                        q = q.Where(e => e.Description.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.PRODUCER:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Producer) : q.OrderByDescending(e => e.Producer);
+                    break;
+                case FilterNames.MODEL:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Model) : q.OrderByDescending(e => e.Model);
+                    break;
+                case FilterNames.TYPE:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Type) : q.OrderByDescending(e => e.Type);
+                    break;
+                case FilterNames.MAXPOWER:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.MaxPower) : q.OrderByDescending(e => e.MaxPower);
+                    break;
+                case FilterNames.WAVELENGTH:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.WaveLength) : q.OrderByDescending(e => e.WaveLength);
+                    break;
+                case FilterNames.OUTPUTPOWER:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.OutputPower) : q.OrderByDescending(e => e.OutputPower);
+                    break;
+                case FilterNames.DESCRIPTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Description) : q.OrderByDescending(e => e.Description);
+                    break;
             }
             return q;
         }

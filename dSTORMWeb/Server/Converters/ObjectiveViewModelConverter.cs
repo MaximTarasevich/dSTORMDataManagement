@@ -15,7 +15,7 @@ namespace dSTORMWeb.Server.Converters
             model.Resolution = entity.Resolution;
             model.EyePiece = entity.EyePiece;
             model.ObjectiveLens = entity.ObjectiveLens;
-            model.Description = entity.Description;
+            model.DescriptionFORM = entity.Description;
 
             return model;
         }
@@ -32,7 +32,7 @@ namespace dSTORMWeb.Server.Converters
             entity.Resolution = model.Resolution;
             entity.EyePiece = model.EyePiece;
             entity.ObjectiveLens = model.ObjectiveLens;
-            entity.Description = model.Description;
+            entity.Description = model.DescriptionFORM;
             return entity;
 
 

@@ -12,31 +12,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dSTORMWeb.Server.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
-    public class ObjectiveController : Controller
+    public class CameraController : Controller
     {
         private readonly DataManager _dm;
 
-        public ObjectiveController(DataManager dm)
+        public CameraController(DataManager dm)
         {
             _dm = dm;
         }
 
         [HttpGet]
-        [Route("GetObjective/{id}")]
-        public async Task<IActionResult> GetObjective([FromRoute] int id)
+        [Route("GetCamera/{id}")]
+        public async Task<IActionResult> GetCamera([FromRoute] int id)
         {
             try
             {
-                var item = await _dm.ObjectiveAccessor.GetObjective(id);
+                var item = await _dm.CameraAccessor.GetCamera(id);
 
                 if (item == null)
                     return Ok(new ResponseModel() { Result = ResultCode.NotFound });
 
 
-                ObjectiveViewModel model = item.ToObjectiveViewModel();
+                CameraViewModel model = item.ToCameraViewModel();
 
                 return Ok(model);
 
@@ -46,13 +45,13 @@ namespace dSTORMWeb.Server.Controllers
                 return Ok(new ResponseModel() { Result = ResultCode.ServerError, Description = ex.Message });
             }
         }
-        [Route("GetObjectives")]
-        public async Task<JsonResult> GetObjectives([FromQuery(Name = "$skip")] int skip = 0, [FromQuery(Name = "$top")] int top = 20,
+        [Route("GetCameras")]
+        public async Task<JsonResult> GetCameras([FromQuery(Name = "$skip")] int skip = 0, [FromQuery(Name = "$top")] int top = 20,
                     [FromQuery(Name = "$orderby")] string sortfield = "name")
         {
-            var filters = FilterHelper.BuildObjectiveFilters(this.HttpContext);
-            var count = await _dm.ObjectiveAccessor.GetObjectivesCount();
-            var list = await _dm.ObjectiveAccessor.GetObjectives(filters, skip, top, sortfield);
+            var filters = FilterHelper.BuildCameraFilters(this.HttpContext);
+            var count = await _dm.CameraAccessor.GetCamerasCount();
+            var list = await _dm.CameraAccessor.GetCameras(filters, skip, top, sortfield);
 
 
 
@@ -61,12 +60,13 @@ namespace dSTORMWeb.Server.Controllers
                 var usersPagedData = list.Select(e => new
                 {
                     id = e.Id,
-                    name = e.Name,
-                    magnification = e.Magnification,
-                    resolution = e.Resolution,
-                    eyepiece = e.EyePiece,
-                    objectivelens = e.ObjectiveLens,
-                    descriptionform = e.Description
+                    model = e.Model,
+                    objective = e.Objective,
+                    producer = e.Producer,
+                    focallength = e.FocalLength,
+                    matrixtype = e.MatrixType,
+                    descriptionform = e.Description,
+
                 }).ToList();
 
                 var result = new
@@ -81,35 +81,38 @@ namespace dSTORMWeb.Server.Controllers
                 var result = new
                 {
                     Count = 0,
-                    Items = new List<ObjectiveEntity>()
+                    Items = new List<CameraEntity>()
                 };
                 return Json(result);
             }
         }
         [HttpPost]
         [Route("Save")]
-        public async Task<IActionResult> Save([FromBody] ObjectiveViewModel model)
+        public async Task<IActionResult> Save([FromBody] CameraViewModel model)
         {
             try
             {
-                ObjectiveEntity entity = null;
+                CameraEntity entity = null;
                 if (!ModelState.IsValid)
                     return Ok(new ResponseModel() { Result = ResultCode.NotValidData });
+                var item = await _dm.CameraAccessor.GetCamera(model.Producer, model.Model);
+                if (item != null && item.Id != model.Id)
+                    return Ok(new ResponseModel() { Result = ResultCode.AlreadyExists });
                 if (model.Id <= 0)
                 {
-                    entity = new ObjectiveEntity();
+                    entity = new CameraEntity();
                 }
                 else
                 {
-                    entity = await _dm.ObjectiveAccessor.GetObjective(model.Id);
+                    entity = await _dm.CameraAccessor.GetCamera(model.Id);
                     if (entity == null)
                         return Ok(new ResponseModel()
                         { Result = ResultCode.AlreadyExists });
 
                 }
-                var entityToSave = model.ToObjectiveEntity();
+                var entityToSave = model.ToCameraEntity();
 
-                await _dm.ObjectiveAccessor.SaveObjective(entityToSave);
+                await _dm.CameraAccessor.SaveCamera(entityToSave);
 
                 return Ok(new ResponseModel() { Result = ResultCode.Success });
             }
@@ -121,15 +124,15 @@ namespace dSTORMWeb.Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-        public async Task<IActionResult> Delete([FromBody] ObjectiveViewModel model)
+        public async Task<IActionResult> Delete([FromBody] CameraViewModel model)
         {
             try
             {
-                var item = await _dm.ObjectiveAccessor.GetObjective(model.Id);
+                var item = await _dm.CameraAccessor.GetCamera(model.Id);
                 if (item == null)
                     return Ok(new ResponseModel() { Result = ResultCode.NotFound });
 
-                await _dm.ObjectiveAccessor.DeleteItem(item.Id);
+                await _dm.CameraAccessor.DeleteCamera(item.Id);
                 return Ok(new ResponseModel() { Result = ResultCode.Success });
             }
             catch (Exception ex)

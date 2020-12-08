@@ -12,37 +12,44 @@
                     <div class="col-sm-9" style="max-width:100%">
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Name</label>
-                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Name" placeholder="Name" />
-                                <ValidationMessage For="@(() => model.Name)" />
+                                <label class="col-form-label labelFont">Producer</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Producer" placeholder="Producer" />
+                                <ValidationMessage For="@(() => model.Producer)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Eye piece</label>
-                                <InputText Class="form-control inputTextClass" @bind-Value="@model.EyePiece" placeholder="Eye piece" />
-                                <ValidationMessage For="@(() => model.EyePiece)" />
+                                <label class="col-form-label labelFont">Model</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Model" placeholder="Model" />
+                                <ValidationMessage For="@(() => model.Model)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Objective lens</label>
-                                <InputText Class="form-control inputTextClass" @bind-Value="@model.ObjectiveLens" placeholder="Objective lens" />
-                                <ValidationMessage For="@(() => model.ObjectiveLens)" />
+                                <label class="col-form-label labelFont">Type</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Type" placeholder="Type" />
+                                <ValidationMessage For="@(() => model.Type)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Magnification</label>
-                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.Magnification" placeholder="Magnification" />
-                                <ValidationMessage For="@(() => model.Magnification)" />
+                                <label class="col-form-label labelFont">Max Power</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.MaxPower" placeholder="Max Power" />
+                                <ValidationMessage For="@(() => model.MaxPower)" />
                             </div>
                         </div>
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
-                                <label class="col-form-label labelFont">Resolution</label>
-                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.Resolution" placeholder="Resolution" />
-                                <ValidationMessage For="@(() => model.Resolution)" />
+                                <label class="col-form-label labelFont">Output Power</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.OutputPower" placeholder="Output Power" />
+                                <ValidationMessage For="@(() => model.OutputPower)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Wave length</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.WaveLength" placeholder="Wave length" />
+                                <ValidationMessage For="@(() => model.WaveLength)" />
                             </div>
                         </div>
                         <div class="form-label-group">
@@ -62,7 +69,7 @@
 
 @code {
     [Parameter]
-    public ObjectiveViewModel model { get; set; } = new ObjectiveViewModel();
+    public LaserViewModel model { get; set; } = new LaserViewModel();
 
     protected override void OnInitialized()
     {

@@ -94,5 +94,32 @@ namespace dSTORMWeb.Server.Helpers
             return filters;
         }
 
+        public static Dictionary<string, FilterEntity> BuildLaserFilter(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
+        public static Dictionary<string, FilterEntity> BuildCameraFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
+        public static Dictionary<string, FilterEntity> BuildAOTFilterFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
     }
 }

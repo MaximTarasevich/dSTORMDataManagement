@@ -15,7 +15,12 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new Camera();
 
             }
-
+            entity.Producer = newEntity.Producer;
+            entity.Model = newEntity.Model;
+            entity.Objective = newEntity.Objective;
+            entity.FocalLength = newEntity.FocalLength;
+            entity.MatrixType = newEntity.MatrixType;
+            entity.Description = newEntity.Description;
 
             return entity;
         }
@@ -27,7 +32,13 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             CameraEntity entity = new CameraEntity();
-
+            entity.Id = model.Id;
+            entity.Producer = model.Producer;
+            entity.Model = model.Model;
+            entity.Objective = model.Objective;
+            entity.FocalLength = model.FocalLength;
+            entity.MatrixType = model.MatrixType;
+            entity.Description = model.Description;
             return entity;
         }
 

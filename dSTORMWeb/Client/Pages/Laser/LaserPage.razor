@@ -1,0 +1,122 @@
+﻿@page "/laser"
+@page "/laser/{id:int}"
+@inject IJSRuntime JS
+
+<div style="height:100%;">
+    <div class="row" style="padding-bottom:10px;">
+        <div class="col-md-2">
+            <button @onclick="Back" type="button" class="btn btn-info" style="width:80%">
+                Back
+            </button>
+        </div>
+        <div class="col-md-10">
+            <button @onclick:preventDefault @onclick="@Save" form="form" type="submit" class="btn btn-primary" style="float:right;width:20%;">Save</button>
+            @if (Id > 0)
+            {
+                <button class="btn btn-danger" @onclick="Delete" style="margin-right:5px;float:right;">Delete</button>
+            }
+        </div>
+    </div>
+    <div class="row" style="height:90%;display:block;">
+        @if (model != null)
+        {
+            <EditForm EditContext="EditContext" id="form" style="">
+                <DataAnnotationsValidator />
+                <ServerSideErrors @ref="serverError"></ServerSideErrors>
+                <fieldset>
+                    <div class="validationErrorContainer">
+                        <ValidationMessage style="font-size: 15px;background-color: lightcoral;border-radius: 5px;padding: 5px;margin-bottom: 10px;" For="@(() => model.ServerErrorField)"></ValidationMessage>
+                    </div>
+                    @if (model != null)
+                    {
+                        <LaserDetails @ref="Details" model="@model">
+
+                        </LaserDetails>
+                    }
+                </fieldset>
+            </EditForm>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    [CascadingParameter(Name = "MainLayout")]
+    private MainLayout Layout { get; set; }
+    ServerSideErrors serverError;
+    LaserDetails Details;
+    EditContext EditContext;
+    public LaserViewModel model;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Layout.ShowLoader();
+
+        if (Id > 0)
+        {
+            model = await service.GetLaser(Id);
+
+        }
+        else
+        {
+            model = new LaserViewModel();
+        }
+        EditContext = new EditContext(model);
+
+        Layout.HideLoader();
+    }
+    private async void Save()// TODO
+    {
+        await Layout.ShowLoader();
+        bool isValid = Validate();
+        if (isValid)
+        {
+            var response = await service.SaveLaser(model);
+            if (response.Result == Models.Enums.ResultCode.Success)
+            {
+                Layout.HideLoader();
+                this.Back();
+            }
+            else
+            {
+                serverError.DisplayError<LaserViewModel>(response); //TODO
+            }
+        }
+        Layout.HideLoader();
+
+    }
+
+
+
+    public async Task Delete()
+    {
+        Layout.ShowLoader();
+        var response = await service.DeleteLaser(model);
+
+        if (response.Result == Models.Enums.ResultCode.Success)
+        {
+            Layout.HideLoader();
+
+            this.Back();
+        }
+        else
+        {
+            serverError.DisplayError<LaserViewModel>(response);
+
+        }
+        Layout.HideLoader();
+
+    }
+    private async void Back()
+    {
+        await JS.InvokeVoidAsync("history.back");
+    }
+    public bool Validate()
+    {
+        return EditContext.Validate();
+    }
+
+}
