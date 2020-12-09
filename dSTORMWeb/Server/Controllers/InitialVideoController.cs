@@ -142,7 +142,15 @@ namespace dSTORMWeb.Server.Controllers
                 return Ok(new ResponseModel() { Result = ResultCode.ServerError });
             }
         }
-
+        [Route("experiments")]
+        public async Task<JsonResult> GetExperiments([FromQuery(Name = "isFilter")] bool IsFilter = false)
+        {
+            var filters = FilterHelper.BuildLaserFilter(this.HttpContext);
+            var items = await _dm.ExperimentAccessor.GetExperiments(filters, 0, 1000, "");
+            if (IsFilter)
+                items.Add(new ExperimentEntity() { Id = -1, Name = "All" });
+            return Json(items);
+        }
         [Route("author")]
         public async Task<JsonResult> GetAuthors([FromQuery(Name = "isFilter")] bool IsFilter = false)
         {

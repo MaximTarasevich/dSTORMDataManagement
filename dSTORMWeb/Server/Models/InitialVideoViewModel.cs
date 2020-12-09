@@ -24,5 +24,8 @@ namespace dSTORMWeb.Server.Models
 
         public byte[] VideoBlob { get; set; }
 
+        public int ExperimentId { get; set; }
+
+
     }
 }

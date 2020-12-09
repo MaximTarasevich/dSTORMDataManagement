@@ -23,6 +23,7 @@ namespace dSTORMWeb.DAL.Converters
             entity.Name = newEntity.Name;
             entity.Description = newEntity.Description;
             entity.AuthorId = newEntity.AuthorId;
+            entity.ExperimentId = newEntity.ExperimentId;
             entity.VideoBlob = newEntity.VideoBlob;
             return entity;
         }
@@ -43,6 +44,7 @@ namespace dSTORMWeb.DAL.Converters
             entity.Name = model.Name;
             entity.Description = model.Description;
             entity.VideoBlob = model.VideoBlob;
+            entity.ExperimentId = model.ExperimentId;
             if (model.Author != null) {
                 entity.AuthorId = model.AuthorId;
                 entity.Author = model.Author.ToAuthorEntity();

@@ -24,5 +24,7 @@ namespace dSTORMWeb.Server.Models
         public int MicroscopeId { get; set; }
         public MicroscopeViewModel Microscope { get; set; }
         public string MicroscopeName { get; set; }
+
+        public string Name { get; set; }
     }
 }

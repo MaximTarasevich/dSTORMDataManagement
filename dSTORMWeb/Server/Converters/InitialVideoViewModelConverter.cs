@@ -18,6 +18,7 @@ namespace dSTORMWeb.Server.Converters
             model.Name = entity.Name;
             model.DescriptionFORM = entity.Description;
             model.VideoBlob = entity.VideoBlob;
+            model.ExperimentId = entity.ExperimentId;
             if (entity.Author != null)
             {
                 model.AuthorId = entity.Author.Id;
@@ -43,6 +44,7 @@ namespace dSTORMWeb.Server.Converters
             entity.Description = model.DescriptionFORM;
             entity.AuthorId = model.AuthorId;
             entity.VideoBlob = model.VideoBlob;
+            entity.ExperimentId = model.ExperimentId;
 
             return entity;
 
