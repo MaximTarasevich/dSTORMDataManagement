@@ -6,7 +6,6 @@ using dSTORMWeb.DAL.Models;
 using dSTORMWeb.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace dSTORMWeb.DAL.Accessors
 {
     public class AuthorAccessor : BaseAccessor<Author>

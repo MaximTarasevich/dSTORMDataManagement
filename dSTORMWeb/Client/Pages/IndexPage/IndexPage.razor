@@ -3,5 +3,10 @@
 <div class="indexClass">Index page</div>
 
 @code {
-
+    [CascadingParameter(Name = "MainLayout")]
+    private MainLayout Layout { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+//await Layout.ShowLoader();
+    }
 }

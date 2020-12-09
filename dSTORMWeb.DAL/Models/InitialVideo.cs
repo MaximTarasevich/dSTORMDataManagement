@@ -18,5 +18,9 @@ namespace dSTORMWeb.DAL.Models
         public string Description { get; set; }
 
         public int AuthorId { get; set; }
+        public Author Author { get; set; }
+
+        public byte[] VideoBlob { get; set; }
+
     }
 }

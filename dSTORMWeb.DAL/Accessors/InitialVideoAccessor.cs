@@ -16,7 +16,7 @@ namespace dSTORMWeb.DAL.Accessors
         public async Task<InitialVideoEntity> GetInitialVideo(int id)
         {
 
-            return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToInitialVideoEntity();
+            return (await Query.Include(e => e.Author).Where(e => e.Id == id).FirstOrDefaultAsync()).ToInitialVideoEntity();
         }
 
         public async Task<InitialVideoEntity> SaveInitialVideo(InitialVideoEntity entity)
@@ -36,7 +36,7 @@ namespace dSTORMWeb.DAL.Accessors
 
         public async Task<List<InitialVideoEntity>> GetInitialVideos(Dictionary<string, FilterEntity> filters, int skip, int take, string sortfield)
         {
-            IQueryable<InitialVideo> q = QueryHelper.BuildQuery(Query, filters, sortfield);
+            IQueryable<InitialVideo> q = QueryHelper.BuildQuery(Query.Include(e => e.Author), filters, sortfield);
 
             return (await q.Skip(skip).Take(take).ToListAsync()).ToInitialVideoEntityCollection().ToList();
         }

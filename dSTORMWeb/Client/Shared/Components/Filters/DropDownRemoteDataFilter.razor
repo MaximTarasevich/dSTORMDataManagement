@@ -1,0 +1,37 @@
+﻿@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Data
+@typeparam T
+
+
+<SfDropDownList TItem="T" TValue="int?" PopupHeight="230px" Query="@Query">
+    <SfDataManager Url="@SourceUrl" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+    <DropDownListFieldSettings Text="Name" Value="Id">
+    </DropDownListFieldSettings>
+
+    <DropDownListEvents TValue="int?" ValueChange="OnSourceChange"></DropDownListEvents>
+</SfDropDownList>
+
+@code {
+    [Parameter]
+    public string FieldName { get; set; }
+    [Parameter]
+    public EventCallback<CallBackObj> OnChangeCallback { get; set; }
+    [Parameter]
+    public string SourceUrl { get; set; }
+    [Parameter]
+    public T model { get; set; }
+    public Query Query = new Query().AddParams("isFilter", true);
+    protected override async Task OnInitializedAsync()
+    {
+    }
+    public void OnSourceChange(ChangeEventArgs<int?> args)
+    {
+        if (args.Value.HasValue)
+        {
+            if (args.Value != -1)
+                OnChangeCallback.InvokeAsync(new CallBackObj() { FieldName = FieldName, FieldValue = args.Value });
+            else
+                OnChangeCallback.InvokeAsync(new CallBackObj() { FieldName = FieldName, FieldValue = "All" });
+        }
+    }
+}

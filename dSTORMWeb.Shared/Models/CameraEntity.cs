@@ -5,8 +5,7 @@ namespace dSTORMWeb.Shared.Models
     {
         public int Id { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
+        
         public string Objective { get; set; }
 
         public string Producer { get; set; }

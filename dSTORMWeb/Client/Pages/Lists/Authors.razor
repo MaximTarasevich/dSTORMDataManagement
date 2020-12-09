@@ -1,0 +1,60 @@
+﻿@page "/authors"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/author/GetAuthors"
+          doubleClick="@((RecordDoubleClickEventArgs<AuthorViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(AuthorViewModel.FirstName)" HeaderText="First Name" TextAlign="TextAlign.Center" Width="150"></GridColumn>
+            <GridColumn Field="@nameof(AuthorViewModel.LastName)" HeaderText="Last Name" TextAlign="TextAlign.Center" Width="150"></GridColumn>
+            <GridColumn Field="@nameof(AuthorViewModel.MiddleName)" HeaderText="Middle Name" TextAlign="TextAlign.Center" Width="150"></GridColumn>
+            <GridColumn Field="@nameof(AuthorViewModel.AcademicRank)" HeaderText="Academic Rank" TextAlign="TextAlign.Center" Width="150"></GridColumn>
+
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<AuthorViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<AuthorViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("author/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/author");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

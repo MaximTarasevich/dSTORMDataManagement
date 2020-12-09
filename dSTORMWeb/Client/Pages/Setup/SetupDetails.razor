@@ -1,0 +1,89 @@
+﻿@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Data
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Setup</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">AOT Filter</label>
+                                <SfDropDownList TItem="AOTFilterViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.AOTFilterId">
+                                    <SfDataManager Url="api/setup/aotfilters" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.AOTFilterId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Camera</label>
+                                <SfDropDownList TItem="CameraViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.CameraId">
+                                    <SfDataManager Url="api/setup/cameras" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.CameraId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Objective</label>
+                                <SfDropDownList TItem="ObjectiveViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.ObjectiveId">
+                                    <SfDataManager Url="api/setup/objectives" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.ObjectiveId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Laser</label>
+                                <SfDropDownList TItem="LaserViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.LaserId">
+                                    <SfDataManager Url="api/setup/lasers" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.LaserId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Microscope</label>
+                                <SfDropDownList TItem="MicroscopeViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.MicroscopeId">
+                                    <SfDataManager Url="api/setup/microscopes" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.MicroscopeId)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public SetupViewModel model { get; set; } = new SetupViewModel();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>
+
+
+
+<div class="col-sm-12" style="max-width:100%;">
+
+</div>

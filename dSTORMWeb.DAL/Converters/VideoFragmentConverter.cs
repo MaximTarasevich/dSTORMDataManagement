@@ -15,7 +15,10 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new VideoFragment();
 
             }
-
+            entity.Frame = newEntity.Frame;
+            entity.FrameTime = newEntity.FrameTime;
+            entity.InitialVideoId = newEntity.InitialVideoId;
+            
 
             return entity;
         }
@@ -27,7 +30,10 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             VideoFragmentEntity entity = new VideoFragmentEntity();
-
+            entity.Id = model.Id;
+            entity.Frame = model.Frame;
+            entity.FrameTime = model.FrameTime;
+            entity.InitialVideoId = model.InitialVideoId;
             return entity;
         }
 

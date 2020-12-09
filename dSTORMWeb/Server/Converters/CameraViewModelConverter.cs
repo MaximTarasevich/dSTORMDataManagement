@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using dSTORMWeb.Server.Models;
 using dSTORMWeb.Shared.Models;
 
@@ -16,6 +18,7 @@ namespace dSTORMWeb.Server.Converters
             model.FocalLength = entity.FocalLength;
             model.MatrixType = entity.MatrixType;
             model.DescriptionFORM = entity.Description;
+            model.Name = entity.Producer;
             return model;
         }
         public static CameraEntity ToCameraEntity(this CameraViewModel model)
@@ -37,6 +40,17 @@ namespace dSTORMWeb.Server.Converters
 
 
 
+        }
+
+        public static IEnumerable<CameraViewModel> ToCameraViewModelCollection(this IEnumerable<CameraEntity> items)
+        {
+            List<CameraViewModel> models = new List<CameraViewModel>();
+            if (items == null)
+                return models;
+
+            models.AddRange(items.Select(e => e.ToCameraViewModel()));
+
+            return models;
         }
 
     }

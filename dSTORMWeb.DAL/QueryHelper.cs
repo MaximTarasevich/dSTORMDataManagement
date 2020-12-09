@@ -17,13 +17,35 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.FIRSTNAME:
+                        q = q.Where(e => e.FirstName.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.MIDDLENAME:
+                        q = q.Where(e => e.MiddleName.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.LASTNAME:
+                        q = q.Where(e => e.LastName.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.ACADEMICRANK:
+                        q = q.Where(e => e.AcademicRank.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.FIRSTNAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.FirstName) : q.OrderByDescending(e => e.FirstName);
+                    break;
+                case FilterNames.MIDDLENAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.MiddleName) : q.OrderByDescending(e => e.MiddleName);
+                    break;
+                case FilterNames.LASTNAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.LastName) : q.OrderByDescending(e => e.LastName);
+                    break;
+                case FilterNames.ACADEMICRANK:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.AcademicRank) : q.OrderByDescending(e => e.AcademicRank);
+                    break;
             }
             return q;
         }
@@ -121,13 +143,26 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.XCOORD:
+                        q = q.Where(e => e.XCoord.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.YCOORD:
+                        q = q.Where(e => e.YCoord.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case "VideoFragmentId":
+                        q = q.Where(e => e.VideoFragmentId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.XCOORD:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.XCoord) : q.OrderByDescending(e => e.XCoord);
+                    break;
+                case FilterNames.YCOORD:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.YCoord) : q.OrderByDescending(e => e.YCoord);
+                    break;
             }
             return q;
         }
@@ -157,13 +192,29 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.INITIALVIDEONAME:
+                        q = q.Where(e => e.InitialVideoId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
+                    case FilterNames.FORMAT:
+                        q = q.Where(e => e.Format.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.RESOLUTION:
+                        q = q.Where(e => e.Resolution.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.INITIALVIDEONAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.InitialVideoId) : q.OrderByDescending(e => e.InitialVideoId);
+                    break;
+                case FilterNames.FORMAT:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Format) : q.OrderByDescending(e => e.Format);
+                    break;
+                case FilterNames.RESOLUTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Resolution) : q.OrderByDescending(e => e.Resolution);
+                    break;
             }
             return q;
         }
@@ -229,13 +280,53 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.NAME:
+                        q = q.Where(e => e.Name.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.FORMAT:
+                        q = q.Where(e => e.Format.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.RESOLUTION:
+                        q = q.Where(e => e.Resolution.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.FRAMEFREQUENCY:
+                        q = q.Where(e => e.FrameFrequency.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.SIZE:
+                        q = q.Where(e => e.Size.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.DURATION:
+                        q = q.Where(e => e.Duration.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.DESCRIPTION:
+                        q = q.Where(e => e.Description.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.NAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Name) : q.OrderByDescending(e => e.Name);
+                    break;
+                case FilterNames.FORMAT:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Format) : q.OrderByDescending(e => e.Format);
+                    break;
+                case FilterNames.RESOLUTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Resolution) : q.OrderByDescending(e => e.Resolution);
+                    break;
+                case FilterNames.FRAMEFREQUENCY:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.FrameFrequency) : q.OrderByDescending(e => e.FrameFrequency);
+                    break;
+                case FilterNames.SIZE:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Size) : q.OrderByDescending(e => e.Size);
+                    break;
+                case FilterNames.DURATION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Duration) : q.OrderByDescending(e => e.Duration);
+                    break;
+                case FilterNames.DESCRIPTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Description) : q.OrderByDescending(e => e.Description);
+                    break;
             }
             return q;
         }
@@ -420,13 +511,41 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.AOTFILTERNAME:
+                        q = q.Where(e => e.AOTFilterId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
+                    case FilterNames.CAMERANAME:
+                        q = q.Where(e => e.CameraId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
+                    case FilterNames.MICROSCOPENAME:
+                        q = q.Where(e => e.MicroscopeId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
+                    case FilterNames.LASERNAME:
+                        q = q.Where(e => e.LaserId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
+                    case FilterNames.OBJECTIVENAME:
+                        q = q.Where(e => e.ObjectiveId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.AOTFILTERNAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.AOTFilter.Name) : q.OrderByDescending(e => e.AOTFilter.Name);
+                    break;
+                case FilterNames.CAMERANAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Camera.Producer) : q.OrderByDescending(e => e.Camera.Producer);
+                    break;
+                case FilterNames.MICROSCOPENAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Microscope.Producer) : q.OrderByDescending(e => e.Microscope.Producer);
+                    break;
+                case FilterNames.LASERNAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Laser.Producer) : q.OrderByDescending(e => e.Laser.Producer);
+                    break;
+                case FilterNames.OBJECTIVENAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Objective.Name) : q.OrderByDescending(e => e.Objective.Name);
+                    break;
             }
             return q;
         }
@@ -438,13 +557,20 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case "InitialVideoId":
+                        q = q.Where(e => e.InitialVideoId == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
+                    case FilterNames.FRAMETIME:
+                        q = q.Where(e => e.FrameTime == System.Convert.ToInt32(f.Value.Value[0]));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.FRAMETIME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.FrameTime) : q.OrderByDescending(e => e.FrameTime);
+                    break;
             }
             return q;
         }

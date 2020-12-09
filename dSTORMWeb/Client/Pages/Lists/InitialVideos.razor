@@ -1,0 +1,64 @@
+﻿@page "/initialvideos"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/initialvideo/GetInitialVideos"
+          doubleClick="@((RecordDoubleClickEventArgs<InitialVideoViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(InitialVideoViewModel.Name)" HeaderText="Video Name" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(InitialVideoViewModel.Format)" HeaderText="Video format" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(InitialVideoViewModel.Resolution)" HeaderText="Resolution" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(InitialVideoViewModel.FrameFrequency)" HeaderText="Frame Frequency" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(InitialVideoViewModel.Size)" HeaderText="Video size" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(InitialVideoViewModel.Duration)" HeaderText="Video Duration" TextAlign="TextAlign.Center" Width="50"></GridColumn>
+            <GridColumn Field="@nameof(InitialVideoViewModel.DescriptionFORM)" HeaderText="Description" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<InitialVideoViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<InitialVideoViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("initialvideo/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/initialvideo");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}
+

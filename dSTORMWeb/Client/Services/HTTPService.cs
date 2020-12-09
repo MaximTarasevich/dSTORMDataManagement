@@ -209,5 +209,112 @@ namespace dSTORMWeb.Client.Services
             return response;
 
         }
+
+
+        public async Task<AuthorViewModel> GetAuthor(int id)
+        {
+
+            string uri = "api/author/GetAuthor/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<AuthorViewModel>(uri);
+
+
+            return req;
+        }
+
+        public async Task<ResponseModel> SaveAuthor(AuthorViewModel model)
+        {
+
+            string uri = "api/author/Save";
+            var request = await _http.PostAsJsonAsync<AuthorViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+        public async Task<SetupViewModel> GetSetup(int id)
+        {
+
+            string uri = "api/setup/GetSetup/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<SetupViewModel>(uri);
+
+
+            return req;
+        }
+
+        public async Task<ResponseModel> SaveSetup(SetupViewModel model)
+        {
+
+            string uri = "api/setup/Save";
+            var request = await _http.PostAsJsonAsync<SetupViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+
+        public async Task<InitialVideoViewModel> GetInitialVideo(int id)
+        {
+
+            string uri = "api/initialvideo/GetInitialVideo/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<InitialVideoViewModel>(uri);
+
+
+            return req;
+        }
+
+        public async Task<ResponseModel> SaveInitialVideo(InitialVideoViewModel model)
+        {
+
+            string uri = "api/initialvideo/Save";
+            var request = await _http.PostAsJsonAsync<InitialVideoViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+        public async Task<VideoFragmentViewModel> GetVideoFragment(int id)
+        {
+
+            string uri = "api/videofragment/GetVideoFragment/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<VideoFragmentViewModel>(uri);
+
+
+            return req;
+        }
+
+        public async Task<ResponseModel> SaveVideoFragment(VideoFragmentViewModel model)
+        {
+
+            string uri = "api/videofragment/Save";
+            var request = await _http.PostAsJsonAsync<VideoFragmentViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+        public async Task<dSTORMInfoViewModel> GetDSTORM(int id)
+        {
+
+            string uri = "api/dstorminfo/GetdSTORMInfoItem/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<dSTORMInfoViewModel>(uri);
+
+
+            return req;
+        }
+
+        public async Task<ResponseModel> SaveDSTORM(dSTORMInfoViewModel model)
+        {
+
+            string uri = "api/dstorminfo/Save";
+            var request = await _http.PostAsJsonAsync<dSTORMInfoViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
     }
 }

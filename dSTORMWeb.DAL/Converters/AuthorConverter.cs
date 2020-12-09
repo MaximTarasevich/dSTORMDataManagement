@@ -16,7 +16,11 @@ namespace dSTORMWeb.DAL.Converters
 
             }
 
-
+            entity.FirstName = newEntity.FirstName;
+            entity.MiddleName = newEntity.MiddleName;
+            entity.LastName = newEntity.LastName;
+            entity.AcademicRank = newEntity.AcademicRank;
+            entity.BirthdayDate = newEntity.BirthdayDate;
             return entity;
         }
 
@@ -28,6 +32,12 @@ namespace dSTORMWeb.DAL.Converters
 
             AuthorEntity entity = new AuthorEntity();
 
+            entity.Id = model.Id;
+            entity.FirstName = model.FirstName;
+            entity.MiddleName = model.MiddleName;
+            entity.LastName = model.LastName;
+            entity.AcademicRank = model.AcademicRank;
+            entity.BirthdayDate = model.BirthdayDate;
             return entity;
         }
 

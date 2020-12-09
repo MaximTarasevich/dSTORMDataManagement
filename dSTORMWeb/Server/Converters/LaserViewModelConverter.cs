@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using dSTORMWeb.Server.Models;
 using dSTORMWeb.Shared.Models;
 
@@ -18,6 +20,7 @@ namespace dSTORMWeb.Server.Converters
             model.MaxPower = entity.MaxPower;
             model.OutputPower = entity.OutputPower;
             model.DescriptionFORM = entity.Description;
+            model.Name = entity.Producer;
             return model;
         }
         public static LaserEntity ToLaserEntity(this LaserViewModel model)
@@ -40,6 +43,17 @@ namespace dSTORMWeb.Server.Converters
 
 
 
+        }
+
+        public static IEnumerable<LaserViewModel> ToLaserViewModelCollection(this IEnumerable<LaserEntity> items)
+        {
+            List<LaserViewModel> models = new List<LaserViewModel>();
+            if (items == null)
+                return models;
+
+            models.AddRange(items.Select(e => e.ToLaserViewModel()));
+
+            return models;
         }
     }
 }

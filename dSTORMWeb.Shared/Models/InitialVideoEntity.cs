@@ -22,5 +22,9 @@ namespace dSTORMWeb.Shared.Models
         public string Description { get; set; }
 
         public int AuthorId { get; set; }
+        public AuthorEntity Author { get; set; }
+
+        public byte[] VideoBlob { get; set; }
+
     }
 }

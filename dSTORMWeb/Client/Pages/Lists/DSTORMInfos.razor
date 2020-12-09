@@ -1,0 +1,73 @@
+﻿@page "/dstorminfos/{id:int}"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<div class="row" style="padding-bottom:10px;">
+    <div class="col-md-2">
+        <button @onclick="Back" type="button" class="btn btn-info" style="width:80%">
+            Back to video fragment
+        </button>
+    </div>
+    <div class="col-md-10">
+
+    </div>
+</div>
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL=@URL
+          doubleClick="@((RecordDoubleClickEventArgs<dSTORMInfoViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(dSTORMInfoViewModel.XCoord)" HeaderText="X coordinate" TextAlign="TextAlign.Center" Width="50%"></GridColumn>
+            <GridColumn Field="@nameof(dSTORMInfoViewModel.YCoord)" HeaderText="Y coordinate" TextAlign="TextAlign.Center" Width="50%"></GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+    DataGrid<dSTORMInfoViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    public string URL;
+    protected override async Task OnInitializedAsync()
+    {
+        URL = "api/dstorminfo/GetdSTORMInfoItems?videoFragmentId=" + Id.ToString();
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<dSTORMInfoViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("dstorminfo/" + id + "/" + this.Id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/dstorminfo/" + 0 + "/" + this.Id);
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+    private async void Back()
+    {
+        nM.NavigateTo("videofragment/" + Id + "/" + 0);
+    }
+}

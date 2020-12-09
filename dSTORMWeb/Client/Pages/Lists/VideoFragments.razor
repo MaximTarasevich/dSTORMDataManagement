@@ -1,0 +1,72 @@
+﻿@page "/videofragments/{id:int}"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<div class="row" style="padding-bottom:10px;">
+    <div class="col-md-2">
+        <button @onclick="Back" type="button" class="btn btn-info" style="width:80%">
+            Back to initial video
+        </button>
+    </div>
+    <div class="col-md-10">
+
+    </div>
+</div>
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL=@URL
+          doubleClick="@((RecordDoubleClickEventArgs<VideoFragmentViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(VideoFragmentViewModel.FrameTime)" HeaderText="Frame Time" TextAlign="TextAlign.Center" Width="100%"></GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+    DataGrid<VideoFragmentViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    public string URL;
+    protected override async Task OnInitializedAsync()
+    {
+        URL = "api/videofragment/GetVideoFragments?initialVideoId=" + Id.ToString();
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<VideoFragmentViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("videofragment/" + id + "/" + this.Id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/videofragment/" + 0 + "/" + this.Id);
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+    private async void Back()
+    {
+       nM.NavigateTo("initialvideo/" + Id);
+    }
+}

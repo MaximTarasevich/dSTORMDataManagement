@@ -12,7 +12,9 @@ namespace dSTORMWeb.Shared.Models
         public string Format { get; set; }
 
         public int InitialVideoId { get; set; }
+        public InitialVideoEntity InitialVideo { get; set; }
 
+        public byte[] FinalImageBlob { get; set; }
 
     }
 }

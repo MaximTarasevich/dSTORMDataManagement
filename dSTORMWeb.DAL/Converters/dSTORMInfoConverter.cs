@@ -16,7 +16,9 @@ namespace dSTORMWeb.DAL.Converters
 
             }
 
-
+            entity.YCoord = newEntity.YCoord;
+            entity.XCoord = newEntity.XCoord;
+            entity.VideoFragmentId = newEntity.VideoFragmentId;
             return entity;
         }
 
@@ -27,7 +29,10 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             dSTORMInfoEntity entity = new dSTORMInfoEntity();
-
+            entity.Id = model.Id;
+            entity.YCoord = model.YCoord;
+            entity.XCoord = model.XCoord;
+            entity.VideoFragmentId = model.VideoFragmentId;
             return entity;
         }
 

@@ -1,0 +1,70 @@
+﻿@using Syncfusion.Blazor.Calendars
+
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Author</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">First Name</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.FirstName" placeholder="First Name" />
+                                <ValidationMessage For="@(() => model.FirstName)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Middle Name</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.MiddleName" placeholder="Middle Name" />
+                                <ValidationMessage For="@(() => model.MiddleName)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Last Name</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.LastName" placeholder="Last Name" />
+                                <ValidationMessage For="@(() => model.LastName)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Academic Rank</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.AcademicRank" placeholder="Academic Rank" />
+                                <ValidationMessage For="@(() => model.AcademicRank)" />
+                            </div>
+                        </div>
+
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="max-width:100%">
+                                <label class="col-form-label">Birthday date</label>
+                                <SfDatePicker TValue="DateTime" @bind-Value="@model.BirthdayDate" Format="dd.MM.yyyy" Placeholder="Birthday date"></SfDatePicker>
+                                <ValidationMessage For="@(() => model.BirthdayDate)" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public AuthorViewModel model { get; set; } = new AuthorViewModel();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>

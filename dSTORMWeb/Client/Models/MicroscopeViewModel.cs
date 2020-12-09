@@ -18,5 +18,8 @@ namespace dSTORMWeb.Client.Models
         [Required]
         [StringLength(45, ErrorMessage = "Type field is to long.")]
         public string Type { get; set; }
+
+        public string Name { get; set; }
+
     }
 }

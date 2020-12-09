@@ -19,7 +19,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).TodSTORMInfoEntity();
         }
+        public async Task<dSTORMInfoEntity> GetdSTORMInfo(double x, double y, int fragId)
+        {
 
+            return (await Query.Where(e => e.XCoord == x && e.YCoord == y && e.VideoFragmentId == fragId).FirstOrDefaultAsync()).TodSTORMInfoEntity();
+        }
         public async Task<dSTORMInfoEntity> SavedSTORMInfo(dSTORMInfoEntity entity)
         {
 

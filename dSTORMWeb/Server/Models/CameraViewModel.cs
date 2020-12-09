@@ -16,5 +16,8 @@ namespace dSTORMWeb.Server.Models
         public string Model { get; set; }
 
         public string MatrixType { get; set; }
+
+        public string Name { get; set; }
+
     }
 }

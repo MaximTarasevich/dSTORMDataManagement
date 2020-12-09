@@ -14,5 +14,7 @@ namespace dSTORMWeb.Shared.Models
         public string LastName { get; set; }
 
         public string AcademicRank { get; set; }
+
+        public DateTime BirthdayDate { get; set; }
     }
 }

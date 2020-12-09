@@ -18,5 +18,7 @@ namespace dSTORMWeb.Server.Models
         public double OutputPower { get; set; }
 
         public string DescriptionFORM { get; set; }
+        public string Name { get; set; }
+
     }
 }

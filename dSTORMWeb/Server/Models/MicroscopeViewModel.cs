@@ -12,5 +12,7 @@ namespace dSTORMWeb.Server.Models
         public string Model { get; set; }
 
         public string Type { get; set; }
+        public string Name { get; set; }
+
     }
 }

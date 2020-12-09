@@ -1,0 +1,86 @@
+﻿@page "/setups"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+@using dSTORMWeb.Client.Shared.Components.Filters
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/setup/GetSetups"
+          doubleClick="@((RecordDoubleClickEventArgs<SetupViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(SetupViewModel.FilterName)" HeaderText="Filter Name" TextAlign="TextAlign.Center" Width="100">
+                <FilterTemplate>
+                    <DropDownRemoteDataFilter OnChangeCallback="onChange" FieldName="@nameof(SetupViewModel.FilterName)" model="model1" SourceUrl="api/setup/aotfilters"></DropDownRemoteDataFilter>
+                </FilterTemplate>
+            </GridColumn>
+            <GridColumn Field="@nameof(SetupViewModel.CameraName)" HeaderText="Camera Producer" TextAlign="TextAlign.Center" Width="100">
+                <FilterTemplate>
+                    <DropDownRemoteDataFilter OnChangeCallback="onChange" FieldName="@nameof(SetupViewModel.CameraName)" model="model2" SourceUrl="api/setup/cameras"></DropDownRemoteDataFilter>
+                </FilterTemplate>
+            </GridColumn>
+            <GridColumn Field="@nameof(SetupViewModel.ObjectiveName)" HeaderText="Objective Name" TextAlign="TextAlign.Center" Width="100">
+                <FilterTemplate>
+                    <DropDownRemoteDataFilter OnChangeCallback="onChange" FieldName="@nameof(SetupViewModel.ObjectiveName)" model="model3" SourceUrl="api/setup/objectives"></DropDownRemoteDataFilter>
+                </FilterTemplate>
+            </GridColumn>
+            <GridColumn Field="@nameof(SetupViewModel.LaserName)" HeaderText="Laser Producer" TextAlign="TextAlign.Center" Width="100">
+                <FilterTemplate>
+                    <DropDownRemoteDataFilter OnChangeCallback="onChange" FieldName="@nameof(SetupViewModel.LaserName)" model="model4" SourceUrl="api/setup/lasers"></DropDownRemoteDataFilter>
+                </FilterTemplate>
+            </GridColumn>
+            <GridColumn Field="@nameof(SetupViewModel.MicroscopeName)" HeaderText="Microscope Producer" TextAlign="TextAlign.Center" Width="100">
+                <FilterTemplate>
+                    <DropDownRemoteDataFilter OnChangeCallback="onChange" FieldName="@nameof(SetupViewModel.MicroscopeName)" model="model5" SourceUrl="api/setup/microscopes"></DropDownRemoteDataFilter>
+                </FilterTemplate>
+            </GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<SetupViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    AOTFilterViewModel model1;
+    CameraViewModel model2;
+    ObjectiveViewModel model3;
+    LaserViewModel model4;
+    MicroscopeViewModel model5;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<SetupViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("setup/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/setup");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

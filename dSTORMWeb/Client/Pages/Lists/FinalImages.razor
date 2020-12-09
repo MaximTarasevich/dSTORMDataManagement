@@ -1,0 +1,66 @@
+﻿@page "/finalimages"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+@using dSTORMWeb.Client.Shared.Components.Filters
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/finalimage/GetFinalImages"
+          doubleClick="@((RecordDoubleClickEventArgs<FinalImageViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(FinalImageViewModel.Resolution)" HeaderText="Resolution" TextAlign="TextAlign.Center" Width="100">
+            </GridColumn>
+            <GridColumn Field="@nameof(FinalImageViewModel.Format)" HeaderText="Format" TextAlign="TextAlign.Center" Width="100">
+            </GridColumn>
+            <GridColumn Field="@nameof(FinalImageViewModel.InitialVideoName)" HeaderText="Initial Video Name" TextAlign="TextAlign.Center" Width="100">
+                <FilterTemplate>
+                    <DropDownRemoteDataFilter OnChangeCallback="onChange" FieldName="@nameof(FinalImageViewModel.InitialVideoName)" model="model1" SourceUrl="api/finalimage/initialvideos"></DropDownRemoteDataFilter>
+                </FilterTemplate>
+            </GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<FinalImageViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    InitialVideoViewModel model1;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<FinalImageViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("finalimage/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/finalimage");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

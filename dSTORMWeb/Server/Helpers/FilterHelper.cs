@@ -121,5 +121,52 @@ namespace dSTORMWeb.Server.Helpers
 
             return filters;
         }
+        public static Dictionary<string, FilterEntity> BuildAuthorFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
+        public static Dictionary<string, FilterEntity> BuildSetupFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
+        public static Dictionary<string, FilterEntity> BuildInitialVideoFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
+
+        public static Dictionary<string, FilterEntity> BuildVideoFragmentFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
+
+        public static Dictionary<string, FilterEntity> BuilddSTORMFilters(HttpContext context)
+        {
+            Dictionary<string, FilterEntity> filters = BuildBasicFilter(context);
+
+            var query = context.Request.Query;
+
+
+            return filters;
+        }
     }
 }

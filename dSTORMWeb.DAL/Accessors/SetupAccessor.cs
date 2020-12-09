@@ -16,9 +16,13 @@ namespace dSTORMWeb.DAL.Accessors
         public async Task<SetupEntity> GetSetup(int id)
         {
 
-            return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToSetupEntity();
+            return (await Query.Include(e => e.AOTFilter).Include(e => e.Camera).Include(e => e.Objective).Include(e => e.Laser).Include(e => e.Microscope).Where(e => e.Id == id).FirstOrDefaultAsync()).ToSetupEntity();
         }
+        public async Task<SetupEntity> GetSetup(int filterId, int cameraId, int laserId, int microscopeId,int objectiveId)
+        {
 
+            return (await Query.Where(e => e.AOTFilterId == filterId && e.CameraId == cameraId && e.LaserId == laserId && e.MicroscopeId == microscopeId && e.ObjectiveId == objectiveId).FirstOrDefaultAsync()).ToSetupEntity();
+        }
         public async Task<SetupEntity> SaveSetup(SetupEntity entity)
         {
 
@@ -36,7 +40,7 @@ namespace dSTORMWeb.DAL.Accessors
 
         public async Task<List<SetupEntity>> GetSetups(Dictionary<string, FilterEntity> filters, int skip, int take, string sortfield)
         {
-            IQueryable<Setup> q = QueryHelper.BuildQuery(Query, filters, sortfield);
+            IQueryable<Setup> q = QueryHelper.BuildQuery(Query.Include(e => e.AOTFilter).Include(e => e.Camera).Include(e => e.Objective).Include(e => e.Laser).Include(e => e.Microscope), filters, sortfield);
 
             return (await q.Skip(skip).Take(take).ToListAsync()).ToSetupEntityCollection().ToList();
         }

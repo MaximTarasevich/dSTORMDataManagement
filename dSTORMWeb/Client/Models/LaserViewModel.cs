@@ -33,5 +33,8 @@ namespace dSTORMWeb.Client.Models
 
         [StringLength(255, ErrorMessage = "Description field is to long.")]
         public string DescriptionFORM { get; set; }
+
+        public string Name { get; set; }
+
     }
 }

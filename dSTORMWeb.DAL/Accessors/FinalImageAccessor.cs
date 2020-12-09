@@ -17,9 +17,13 @@ namespace dSTORMWeb.DAL.Accessors
         public async Task<FinalImageEntity> GetFinalImage(int id)
         {
 
-            return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToFinalImageEntity();
+            return (await Query.Include(e => e.InitialVideo).Where(e => e.Id == id).FirstOrDefaultAsync()).ToFinalImageEntity();
         }
+        public async Task<FinalImageEntity> GetFinalImageS(int initialVideoId)
+        {
 
+            return (await Query.Include(e => e.InitialVideo).Where(e => e.InitialVideoId == initialVideoId).FirstOrDefaultAsync()).ToFinalImageEntity();
+        }
         public async Task<FinalImageEntity> SaveFinalImage(FinalImageEntity entity)
         {
 
@@ -37,7 +41,7 @@ namespace dSTORMWeb.DAL.Accessors
 
         public async Task<List<FinalImageEntity>> GetFinalImages(Dictionary<string, FilterEntity> filters, int skip, int take, string sortfield)
         {
-            IQueryable<FinalImage> q = QueryHelper.BuildQuery(Query, filters, sortfield);
+            IQueryable<FinalImage> q = QueryHelper.BuildQuery(Query.Include(e => e.InitialVideo), filters, sortfield);
 
             return (await q.Skip(skip).Take(take).ToListAsync()).ToFinalImageEntityCollection().ToList();
         }

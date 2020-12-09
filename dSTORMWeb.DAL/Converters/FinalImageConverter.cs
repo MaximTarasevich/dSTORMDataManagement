@@ -15,8 +15,10 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new FinalImage();
 
             }
-
-
+            entity.Format = newEntity.Format;
+            entity.Resolution = newEntity.Resolution;
+            entity.FinalImageBlob = newEntity.FinalImageBlob;
+            entity.InitialVideoId = newEntity.InitialVideoId;
             return entity;
         }
 
@@ -27,7 +29,13 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             FinalImageEntity entity = new FinalImageEntity();
-
+            entity.Id = model.Id;
+            entity.Format = model.Format;
+            entity.Resolution = model.Resolution;
+            entity.FinalImageBlob = model.FinalImageBlob;
+            entity.InitialVideoId = model.InitialVideoId;
+            if (model.InitialVideo != null)
+                entity.InitialVideo = model.InitialVideo.ToInitialVideoEntity();
             return entity;
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using dSTORMWeb.Server.Models;
 using dSTORMWeb.Shared.Models;
 
@@ -27,10 +29,6 @@ namespace dSTORMWeb.Server.Converters
             entity.IntensityValue = model.IntensityValue;
             entity.Description = model.DescriptionFORM;
             return entity;
-
-
-
-
         }
     }
 }

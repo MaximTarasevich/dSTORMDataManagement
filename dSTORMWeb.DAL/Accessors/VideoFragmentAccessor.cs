@@ -18,6 +18,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToVideoFragmentEntity();
         }
+        public async Task<VideoFragmentEntity> GetVideoFragment(int initialVideoId,int frametime)
+        {
+
+            return (await Query.Where(e => e.InitialVideoId == initialVideoId && e.FrameTime == frametime).FirstOrDefaultAsync()).ToVideoFragmentEntity();
+        }
 
         public async Task<VideoFragmentEntity> SaveVideoFragment(VideoFragmentEntity entity)
         {

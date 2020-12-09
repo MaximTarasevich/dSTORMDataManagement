@@ -16,7 +16,21 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new Setup();
 
             }
-
+            entity.AOTFilterId = newEntity.AOTFilterId;
+            entity.CameraId = newEntity.CameraId;
+            entity.ObjectiveId = newEntity.ObjectiveId;
+            entity.LaserId = newEntity.LaserId;
+            entity.MicroscopeId = newEntity.MicroscopeId;
+           // if(newEntity.AOTFilter != null)
+           //     entity.AOTFilterId = newEntity.AOTFilter.Id;
+           // if (newEntity.Camera != null)
+            //    entity.CameraId = newEntity.Camera.Id;
+           // if (newEntity.Objective != null)
+           //     entity.ObjectiveId = newEntity.Objective.Id;
+          //  if (newEntity.Laser != null)
+          //      entity.LaserId = newEntity.Laser.Id;
+          //  if (newEntity.Microscope != null)
+          //      entity.MicroscopeId = newEntity.Microscope.Id;
 
             return entity;
         }
@@ -28,6 +42,19 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             SetupEntity entity = new SetupEntity();
+            entity.Id = model.Id;
+
+            if (model.AOTFilter != null)
+                entity.AOTFilter = model.AOTFilter.ToAOTFilterEntity();
+            if (model.Camera != null)
+                entity.Camera = model.Camera.ToCameraEntity();
+            if (model.Objective != null)
+                entity.Objective = model.Objective.ToObjectiveEntity();
+            if (model.Laser != null)
+                entity.Laser = model.Laser.ToLaserEntity();
+            if (model.Microscope != null)
+                entity.Microscope = model.Microscope.ToMicroscopeEntity();
+
 
             return entity;
         }

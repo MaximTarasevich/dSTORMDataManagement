@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using BlazorInputFile
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Video Fragment</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Frame Time</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.FrameTime" placeholder="Frame Time" />
+                                <ValidationMessage For="@(() => model.FrameTime)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;display:grid;">
+                                <label class="col-form-label labelFont">Frame</label>
+                                <InputFile OnChange="HandleSelection" />
+                                <p>@status</p>
+                                <ValidationMessage For="@(() => model.Frame)" />
+
+                            </div>
+                            @if (model.Frame != null && model.Frame.Length > 0)
+                            {
+                                <div class="col-sm-12" style="margin-top:10px;">
+                                    <img style="width:400px;height:400px;" src="data:image/png;base64,@System.Convert.ToBase64String(model.Frame)" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public VideoFragmentViewModel model { get; set; } = new VideoFragmentViewModel();
+    protected override void OnInitialized()
+    {
+
+    }
+    string imgSrc;
+    string status;
+
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        var file = files.FirstOrDefault();
+
+        if (file != null && (file.Type.Contains("bmp") || file.Type.Contains("jpg") || file.Type.Contains("png")))
+        {
+            var ms = new System.IO.MemoryStream();
+            await file.Data.CopyToAsync(ms);
+            var reader = new System.IO.StreamReader(file.Data);
+            string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+            imgSrc = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            this.model.Frame = ms.ToArray();
+            status = $"Finished loading {file.Size} bytes from {file.Name} filetype: {file.Type}";
+        }
+        else
+        {
+            status = "File is null or it is not image.";
+        }
+    }
+
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>

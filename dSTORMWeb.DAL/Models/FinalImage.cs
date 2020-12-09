@@ -8,7 +8,9 @@ namespace dSTORMWeb.DAL.Models
         public string Format { get; set; }
 
         public int InitialVideoId { get; set; }
+        public InitialVideo InitialVideo { get; set; }
 
+        public byte[] FinalImageBlob { get; set; }
 
     }
 }

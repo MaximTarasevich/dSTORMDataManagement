@@ -115,6 +115,81 @@ namespace dSTORMWeb.Client.Services
                         break;
                 }
             }
+            else if (Type == typeof(AuthorViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Author already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(SetupViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Setup with such AotFilter/Camera/Laser/Objectie/Microscope already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(InitialVideoViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Initial Video already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(VideoFragmentViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Video fragment already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(dSTORMInfoViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Such coordinates already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
             CurrentEditContext.NotifyValidationStateChanged();
 
         }

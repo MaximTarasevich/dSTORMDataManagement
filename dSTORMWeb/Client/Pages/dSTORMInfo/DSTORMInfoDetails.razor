@@ -1,0 +1,50 @@
+﻿@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.RichTextEditor
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.DropDowns
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">dSTORM Info</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">X coordinate</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.XCoord" placeholder="X coordinate" />
+                                <ValidationMessage For="@(() => model.XCoord)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Y coordinate</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.YCoord" placeholder="Y coordinate" />
+                                <ValidationMessage For="@(() => model.YCoord)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public dSTORMInfoViewModel model { get; set; } = new dSTORMInfoViewModel();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>
