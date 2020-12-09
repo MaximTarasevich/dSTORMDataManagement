@@ -10,7 +10,7 @@
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
                                 <label class="col-form-label labelFont">AOT Filter</label>
-                                <SfDropDownList TItem="AOTFilterViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.AOTFilterId">
+                                <SfDropDownList TItem="AOTFilterViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.AOTFilterId">
                                     <SfDataManager Url="api/setup/aotfilters" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
                                     <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
                                 </SfDropDownList>
@@ -20,7 +20,7 @@
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
                                 <label class="col-form-label labelFont">Camera</label>
-                                <SfDropDownList TItem="CameraViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.CameraId">
+                                <SfDropDownList TItem="CameraViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.CameraId">
                                     <SfDataManager Url="api/setup/cameras" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
                                     <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
                                 </SfDropDownList>
@@ -30,7 +30,7 @@
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
                                 <label class="col-form-label labelFont">Objective</label>
-                                <SfDropDownList TItem="ObjectiveViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.ObjectiveId">
+                                <SfDropDownList TItem="ObjectiveViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.ObjectiveId">
                                     <SfDataManager Url="api/setup/objectives" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
                                     <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
                                 </SfDropDownList>
@@ -40,7 +40,7 @@
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
                                 <label class="col-form-label labelFont">Laser</label>
-                                <SfDropDownList TItem="LaserViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.LaserId">
+                                <SfDropDownList TItem="LaserViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.LaserId">
                                     <SfDataManager Url="api/setup/lasers" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
                                     <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
                                 </SfDropDownList>
@@ -50,7 +50,7 @@
                         <div class="form-label-group">
                             <div class="col-sm-12" style="margin-top:10px;">
                                 <label class="col-form-label labelFont">Microscope</label>
-                                <SfDropDownList TItem="MicroscopeViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.MicroscopeId">
+                                <SfDropDownList TItem="MicroscopeViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.MicroscopeId">
                                     <SfDataManager Url="api/setup/microscopes" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
                                     <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
                                 </SfDropDownList>

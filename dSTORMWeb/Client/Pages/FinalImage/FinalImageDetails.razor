@@ -1,0 +1,100 @@
+﻿@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Data
+@using BlazorInputFile 
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Setup</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Format</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Format" placeholder="Format" />
+                                <ValidationMessage For="@(() => model.Format)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Resolution</label>
+                                <InputNumber Class="form-control inputTextClass" @bind-Value="@model.Resolution" placeholder="Resolution" />
+                                <ValidationMessage For="@(() => model.Resolution)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Initial Video</label>
+                                <SfDropDownList TItem="InitialVideoViewModel" TValue="int" PopupHeight="230px" @bind-Value="@model.InitialVideoId">
+                                    <SfDataManager Url="api/finalimage/initialvideos" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.InitialVideoId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;display:grid;">
+                                <label class="col-form-label labelFont">Frame</label>
+                                <InputFile OnChange="HandleSelection" />
+                                <p>@status</p>
+                                <ValidationMessage For="@(() => model.FinalImageBlob)" />
+
+                            </div>
+                            @if (model.FinalImageBlob != null && model.FinalImageBlob.Length > 0)
+                            {
+                                <div class="col-sm-12" style="margin-top:10px;">
+                                    <img style="width:400px;height:400px;" src="data:image/png;base64,@System.Convert.ToBase64String(model.FinalImageBlob)" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public FinalImageViewModel model { get; set; } = new FinalImageViewModel();
+    string status;
+
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        var file = files.FirstOrDefault();
+
+        if (file != null && (file.Type.Contains("bmp") || file.Type.Contains("jpg") || file.Type.Contains("png")))
+        {
+            var ms = new System.IO.MemoryStream();
+            await file.Data.CopyToAsync(ms);
+            var reader = new System.IO.StreamReader(file.Data);
+            string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+            //imgSrc = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            this.model.FinalImageBlob = ms.ToArray();
+            status = $"Finished loading {file.Size} bytes from {file.Name} filetype: {file.Type}";
+        }
+        else
+        {
+            status = "File is null or it is not image.";
+        }
+    }
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>
+
+
+
+<div class="col-sm-12" style="max-width:100%;">
+
+</div>

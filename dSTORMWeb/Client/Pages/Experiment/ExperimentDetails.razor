@@ -1,0 +1,80 @@
+﻿@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Data
+<div class="row" style="display:block;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header title">Setup</div>
+            <div class="card-body">
+                <div class="form-label-group">
+                    <div class="col-sm-9" style="max-width:100%">
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Experiment Name</label>
+                                <InputText Class="form-control inputTextClass" @bind-Value="@model.Name" placeholder="Experiment Name" />
+                                <ValidationMessage For="@(() => model.Name)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Physical Property</label>
+                                <SfDropDownList TItem="PhysicalPropertyViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.PhysicalPropertyId">
+                                    <SfDataManager Url="api/experiment/physicalproperties" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.PhysicalPropertyId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Setup</label>
+                                <SfDropDownList TItem="SetupViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.SetupId">
+                                    <SfDataManager Url="api/experiment/setups" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.SetupId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Fluorophore</label>
+                                <SfDropDownList TItem="FluorophoreViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.FluorophoreId">
+                                    <SfDataManager Url="api/experiment/fluorophores" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.FluorophoreId)" />
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <div class="col-sm-12" style="margin-top:10px;">
+                                <label class="col-form-label labelFont">Research Object</label>
+                                <SfDropDownList TItem="ResearchObjectViewModel" TValue="int?" PopupHeight="230px" @bind-Value="@model.ResearchObjectId">
+                                    <SfDataManager Url="api/experiment/researchobjects" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+                                    <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                                </SfDropDownList>
+                                <ValidationMessage For="@(() => model.ResearchObjectId)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public ExperimentViewModel model { get; set; } = new ExperimentViewModel();
+
+    protected override void OnInitialized()
+    {
+
+    }
+}
+
+<style>
+    .validation-message {
+        color: red;
+        font-size: 12px;
+    }
+</style>

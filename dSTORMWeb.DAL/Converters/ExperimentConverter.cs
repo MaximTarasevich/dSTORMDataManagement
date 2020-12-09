@@ -16,7 +16,11 @@ namespace dSTORMWeb.DAL.Converters
 
             }
 
-
+            entity.PhysicalPropertyId = newEntity.PhysicalPropertyId;
+            entity.SetupId = newEntity.SetupId;
+            entity.FluorophoreId = newEntity.FluorophoreId;
+            entity.ResearchObjectId = newEntity.ResearchObjectId;
+            entity.Name = newEntity.Name;
             return entity;
         }
 
@@ -27,6 +31,17 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             ExperimentEntity entity = new ExperimentEntity();
+
+            entity.Id = model.Id;
+            entity.Name = model.Name;
+            if (model.PhysicalProperty != null)
+                entity.PhysicalProperty = model.PhysicalProperty.ToPhysicalPropertyEntity();
+            if (model.Setup != null)
+                entity.Setup = model.Setup.ToSetupEntity();
+            if (model.Fluorophore != null)
+                entity.Fluorophore = model.Fluorophore.ToFluorophoreEntity();
+            if (model.ResearchObject != null)
+                entity.ResearchObject = model.ResearchObject.ToResearchObjectEntity();
 
             return entity;
         }

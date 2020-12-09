@@ -14,5 +14,7 @@ namespace dSTORMWeb.Client.Models
         [Required]
         [Range(-1000, 1000, ErrorMessage = "Accommodation invalid (-1000 - 1000).")]
         public double Temperature { get; set; }
+
+        public string Name { get; set; }
     }
 }

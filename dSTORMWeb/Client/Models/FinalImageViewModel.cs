@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace dSTORMWeb.Client.Models
 {
-    public class FinalImageViewModel
+    public class FinalImageViewModel : ResponseModel
     {
         public int Id { get; set; }
 

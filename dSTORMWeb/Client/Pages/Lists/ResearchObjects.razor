@@ -1,0 +1,60 @@
+﻿@page "/researchobjects"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/researchobject/GetResearchObjects"
+          doubleClick="@((RecordDoubleClickEventArgs<ResearchObjectViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(ResearchObjectViewModel.Name)" HeaderText="Name" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+         </GridColumns>
+    </Columns>
+</DataGrid>
+
+
+@code
+{
+        [Parameter]
+        public int Id { get; set; }
+        DataGrid<ResearchObjectViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<ResearchObjectViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("researchobject/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/researchobject");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+
+
+
+}

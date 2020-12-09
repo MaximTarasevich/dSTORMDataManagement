@@ -12,6 +12,7 @@ namespace dSTORMWeb.Server.Converters
             model.Id = entity.Id;
             model.Format = entity.Format;
             model.Resolution = entity.Resolution;
+            model.FinalImageBlob = entity.FinalImageBlob;
             if (entity.InitialVideo != null)
             {
                 model.InitialVideoId = entity.InitialVideo.Id;
@@ -27,8 +28,9 @@ namespace dSTORMWeb.Server.Converters
                 entity.Id = model.Id;
 
             }
-            entity.Format = entity.Format;
-            entity.Resolution = entity.Resolution;
+            entity.Format = model.Format;
+            entity.Resolution = model.Resolution;
+            entity.FinalImageBlob = model.FinalImageBlob;
             entity.InitialVideoId = model.InitialVideoId;
 
             return entity;

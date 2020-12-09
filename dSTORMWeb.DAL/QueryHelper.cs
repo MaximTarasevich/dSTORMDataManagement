@@ -174,13 +174,17 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.NAME:
+                        q = q.Where(e => e.Name.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.NAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Name) : q.OrderByDescending(e => e.Name);
+                    break;
             }
             return q;
         }
@@ -226,13 +230,35 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.NAME:
+                        q = q.Where(e => e.Name.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.CLASS:
+                        q = q.Where(e => e.Class.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.ABSORPTION:
+                        q = q.Where(e => e.Absorption.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
+                    case FilterNames.EMISSION:
+                        q = q.Where(e => e.Emission.ToString().ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.NAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Name) : q.OrderByDescending(e => e.Name);
+                    break;
+                case FilterNames.EMISSION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Emission) : q.OrderByDescending(e => e.Emission);
+                    break;
+                case FilterNames.ABSORPTION:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Absorption) : q.OrderByDescending(e => e.Absorption);
+                    break;
+                case FilterNames.CLASS:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Class) : q.OrderByDescending(e => e.Class);
+                    break;
             }
             return q;
         }
@@ -244,13 +270,17 @@ namespace dSTORMWeb.DAL
 
                 switch (fKey)
                 {
-
+                    case FilterNames.NAME:
+                        q = q.Where(e => e.Name.ToLower().Contains((f.Value.Value[0]).ToLower()));
+                        break;
                 }
             }
             string sortOrder = sortfield.Contains(' ') == true ? sortfield.Split(new char[] { ' ' })[1] : "asc";
             switch (sortfield.Split(new char[] { ' ' })[0].ToLower())
             {
-
+                case FilterNames.NAME:
+                    q = (sortOrder == "asc") ? q.OrderBy(e => e.Name) : q.OrderByDescending(e => e.Name);
+                    break;
             }
             return q;
         }

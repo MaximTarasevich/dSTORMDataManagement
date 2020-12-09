@@ -190,6 +190,66 @@ namespace dSTORMWeb.Client.Services
                         break;
                 }
             }
+            else if (Type == typeof(FinalImageViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Final image for this video  already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(FluorophoreViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Fluorophore with such Name already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(ResearchObjectViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Research Object with such Name already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
+            else if (Type == typeof(ExperimentViewModel).Name)
+            {
+                switch (response.Result)
+                {
+                    case Models.Enums.ResultCode.NotValidData:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Not valid data");
+                        break;
+                    case Models.Enums.ResultCode.AlreadyExists:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Experiment with such elements combination already exist");
+                        break;
+                    case Models.Enums.ResultCode.ServerError:
+                        MessageStore.Add(CurrentEditContext.Field(ErrorFieldName), "Server Error :" + response.Description);
+                        break;
+                }
+            }
             CurrentEditContext.NotifyValidationStateChanged();
 
         }

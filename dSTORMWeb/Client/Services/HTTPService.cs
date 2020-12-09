@@ -316,5 +316,87 @@ namespace dSTORMWeb.Client.Services
 
             return response;
         }
+
+
+        public async Task<FinalImageViewModel> GetFinalImage(int id)
+        {
+
+            string uri = "api/finalimage/GetFinalImage/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<FinalImageViewModel>(uri);
+
+
+            return req;
+        }
+        public async Task<ResponseModel> SaveFinalImage(FinalImageViewModel model)
+        {
+
+            string uri = "api/finalimage/Save";
+            var request = await _http.PostAsJsonAsync<FinalImageViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+        public async Task<FluorophoreViewModel> GetFluorophore(int id)
+        {
+
+            string uri = "api/fluorophore/GetFluorophore/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<FluorophoreViewModel>(uri);
+
+
+            return req;
+        }
+        public async Task<ResponseModel> SaveFluorophore(FluorophoreViewModel model)
+        {
+
+            string uri = "api/fluorophore/Save";
+            var request = await _http.PostAsJsonAsync<FluorophoreViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+        public async Task<ResearchObjectViewModel> GetResearchObject(int id)
+        {
+
+            string uri = "api/researchobject/GetResearchObject/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<ResearchObjectViewModel>(uri);
+
+
+            return req;
+        }
+        public async Task<ResponseModel> SaveResearchObject(ResearchObjectViewModel model)
+        {
+
+            string uri = "api/researchobject/Save";
+            var request = await _http.PostAsJsonAsync<ResearchObjectViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
+        public async Task<ExperimentViewModel> GetExperiment(int id)
+        {
+
+            string uri = "api/experiment/GetExperiment/" + id;
+            var request = await _http.GetFromJsonAsync<object>(uri);
+            var req = await _http.GetFromJsonAsync<ExperimentViewModel>(uri);
+
+
+            return req;
+        }
+        public async Task<ResponseModel> SaveExperiment(ExperimentViewModel model)
+        {
+
+            string uri = "api/experiment/Save";
+            var request = await _http.PostAsJsonAsync<ExperimentViewModel>(uri, model);
+            var response = await request.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return response;
+        }
+
     }
 }

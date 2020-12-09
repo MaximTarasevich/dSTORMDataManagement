@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using dSTORMWeb.Server.Models;
 using dSTORMWeb.Shared.Models;
 
@@ -13,6 +15,8 @@ namespace dSTORMWeb.Server.Converters
             model.Id = entity.Id;
             model.Temperature = entity.Temperature;
             model.Humidity = entity.Humidity;
+
+            model.Name = "Temperature: " + entity.Temperature.ToString() + ", Humidity: " + entity.Humidity.ToString();
             return model;
         }
         public static PhysicalPropertyEntity ToPhysicalPropertyEntity(this PhysicalPropertyViewModel model)
@@ -27,10 +31,17 @@ namespace dSTORMWeb.Server.Converters
             entity.Temperature = model.Temperature;
 
             return entity;
+        }
 
+        public static IEnumerable<PhysicalPropertyViewModel> ToPhysicalPropertyViewModelCollection(this IEnumerable<PhysicalPropertyEntity> items)
+        {
+            List<PhysicalPropertyViewModel> models = new List<PhysicalPropertyViewModel>();
+            if (items == null)
+                return models;
 
+            models.AddRange(items.Select(e => e.ToPhysicalPropertyViewModel()));
 
-
+            return models;
         }
     }
 }

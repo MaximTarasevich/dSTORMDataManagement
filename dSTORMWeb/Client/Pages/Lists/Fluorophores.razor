@@ -1,0 +1,59 @@
+﻿@page "/fluorophores"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/fluorophore/GetFluorophores"
+          doubleClick="@((RecordDoubleClickEventArgs<FluorophoreViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(FluorophoreViewModel.Name)" HeaderText="Name" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(FluorophoreViewModel.Absorption)" HeaderText="Absorption" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(FluorophoreViewModel.Emission)" HeaderText="Emission" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            <GridColumn Field="@nameof(FluorophoreViewModel.Class)" HeaderText="Class" TextAlign="TextAlign.Center" Width="150"></GridColumn>
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<FluorophoreViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<FluorophoreViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("fluorophore/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/fluorophore");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

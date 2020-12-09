@@ -19,7 +19,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToFluorophoreEntity();
         }
+        public async Task<FluorophoreEntity> GetFluorophore(string name)
+        {
 
+            return (await Query.Where(e => e.Name == name).FirstOrDefaultAsync()).ToFluorophoreEntity();
+        }
         public async Task<FluorophoreEntity> SaveFluorophore(FluorophoreEntity entity)
         {
 

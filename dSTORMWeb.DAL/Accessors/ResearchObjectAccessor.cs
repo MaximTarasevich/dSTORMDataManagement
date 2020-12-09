@@ -19,7 +19,11 @@ namespace dSTORMWeb.DAL.Accessors
 
             return (await Query.Where(e => e.Id == id).FirstOrDefaultAsync()).ToResearchObjectEntity();
         }
+        public async Task<ResearchObjectEntity> GetResearchObject(string name)
+        {
 
+            return (await Query.Where(e => e.Name == name).FirstOrDefaultAsync()).ToResearchObjectEntity();
+        }
         public async Task<ResearchObjectEntity> SaveResearchObject(ResearchObjectEntity entity)
         {
 

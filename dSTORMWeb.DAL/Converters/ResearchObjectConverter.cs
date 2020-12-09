@@ -15,7 +15,7 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new ResearchObject();
 
             }
-
+            entity.Name = newEntity.Name;
 
             return entity;
         }
@@ -27,7 +27,8 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             ResearchObjectEntity entity = new ResearchObjectEntity();
-
+            entity.Id = model.Id;
+            entity.Name = model.Name;
             return entity;
         }
 

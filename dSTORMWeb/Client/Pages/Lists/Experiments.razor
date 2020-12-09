@@ -1,0 +1,57 @@
+﻿@page "/experiments"
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+
+<DataGrid @ref="BaseGrid" PageSize="25"
+          URL="api/experiment/GetExperiments"
+          doubleClick="@((RecordDoubleClickEventArgs<ExperimentViewModel> ev) => { RecordDoubleClickHandler(ev); })"
+          ToolbarClickHandler="@ToolbarClickHandler"
+          ToolbarItems="@ToolbarItems">
+    <Columns>
+        <GridColumns>
+            <GridColumn Field="@nameof(ExperimentViewModel.Name)" HeaderText="Experiment Name" TextAlign="TextAlign.Center" Width="100"></GridColumn>
+            
+        </GridColumns>
+    </Columns>
+</DataGrid>
+
+@code
+{
+
+    DataGrid<ExperimentViewModel> BaseGrid;
+    public List<object> ToolbarItems;
+    protected override async Task OnInitializedAsync()
+    {
+
+        ToolbarItems = new List<object> {
+            new ItemModel() { Text = "Add", TooltipText = "Add", PrefixIcon = "e-add", Id = "Add" },
+            new ItemModel() { Text = "Refresh", TooltipText = "Refresh", PrefixIcon = "e-refresh", Id = "Refresh" }
+                                                        };
+
+
+    }
+
+    private void RecordDoubleClickHandler(RecordDoubleClickEventArgs<ExperimentViewModel>
+    args)
+    {
+        var id = args.RowData.Id;
+        if (id > 0)
+            nM.NavigateTo("experiment/" + id);
+    }
+    private void ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item.Id == "Refresh")
+        {
+            BaseGrid.Refresh();
+        }
+        if (args.Item.Id == "Add")
+        {
+            nM.NavigateTo("/experiment");
+        }
+    }
+    private void onChange(CallBackObj obj)
+    {
+        this.BaseGrid.FilterByColumn(obj.FieldName, "equal", obj.FieldValue);
+    }
+}

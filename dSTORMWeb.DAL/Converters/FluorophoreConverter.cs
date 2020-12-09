@@ -15,7 +15,10 @@ namespace dSTORMWeb.DAL.Converters
                 entity = new Fluorophore();
 
             }
-
+            entity.Name = newEntity.Name;
+            entity.Emission = newEntity.Emission;
+            entity.Absorption = newEntity.Absorption;
+            entity.Class = newEntity.Class;
 
             return entity;
         }
@@ -27,6 +30,11 @@ namespace dSTORMWeb.DAL.Converters
                 return null;
 
             FluorophoreEntity entity = new FluorophoreEntity();
+            entity.Id = model.Id;
+            entity.Name = model.Name;
+            entity.Emission = model.Emission;
+            entity.Absorption = model.Absorption;
+            entity.Class = model.Class;
 
             return entity;
         }

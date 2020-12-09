@@ -39,6 +39,13 @@ namespace dSTORMWeb.Shared
         public const string YCOORD = "ycoord";
         public const string INITIALVIDEONAME = "initialvideoname";
 
+        public const string CLASS = "class";
+        public const string EMISSION = "emission";
+        public const string ABSORPTION = "absorption";
+
+
+
+
 
 
 
