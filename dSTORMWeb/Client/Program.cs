@@ -17,7 +17,6 @@ namespace dSTORMWeb.Client
     {
         public static async Task Main(string[] args)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MDAxQDMxMzgyZTMxMmUzME5UakgwSnMyWTF6WFFtNVh5dm9hZ0tYV0k3RFowNUsvbWtpdXFvUFYyaEk9");
 
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
